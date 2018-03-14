@@ -1,0 +1,20 @@
+.profile-card {
+    max-height: 100%;
+    margin-bottom: 10px;
+}
+
+.profile-img {
+    max-width: 100%;
+    width: auto;
+    
+   
+}
+
+.imgwrapper {
+    max-width: 18rem;
+    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+}
