@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Politiscape</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Scrolling Politicians</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/scrolling.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/nav.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="main.html">
+      <img class="nav-logo" alt="logo" src="assets/images/politiscape.png">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <!-- Leaving space for future links in expansion -->
+        
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-xs-1" id="address" type="number" placeholder="Your Zip Code" pattern="[0-9]{5}" aria-label="zipcode">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Zip</button>
+      </form>
+    </div>
+  </nav>
+
+  <div class="row">
+      <div class="container scrolling-profiles">
+          <div class="col-md-8 mx-auto">
+              <div class="card profile-card">
+                  <div class="imgwrapper">
+                      <img class="card-img-top img-fluid img-responsive profile-img" src="assets/images/adler.jpg" alt="Card image cap">
+                  </div>
+                  <div class="card-body text-center">
+                      <h5 class="card-title">
+                          <span class="name">Steve Adler</span>
+                      </h5>
+                      <p class="card-text text-muted">
+                          <span class="position">Austin Mayor</span>
+                          --
+                          <span class="party">Democrat</span>
+                      </p>
+                      
+                      <a href="https://twitter.com/justbbarnett">
+                          <span class="fa-stack fa-lg">
+                              <i class="fa fa-circle fa-stack-2x"></i>
+                              <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                          </span>
+                      </a>
+                      <a href="https://www.facebook.com/justB.Barnett/">
+                          <span class="fa-stack fa-lg">
+                              <i class="fa fa-circle fa-stack-2x"></i>
+                              <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                          </span>
+                      </a>
+                      <a href="gmail.com" class="social email">
+                          <i class="fa fa-email"></i>
+                      </a>
+                      <a href="https://www.linkedin.com/in/justbbarnett/">
+                          <span class="fa-stack fa-lg">
+                              <i class="fa fa-circle fa-stack-2x"></i>
+                              <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                          </span>
+                      </a>
+                      <a href="#" class="btn btn-primary">More!</a>
+                  </div>
+              </div>
+              <div class="card profile-card" >
+                      <div class="imgwrapper">
+                          <img class="card-img-top img-fluid img-responsive profile-img" src="assets/images/president.jpg" alt="Card image cap">
+                      </div>
+                      <div class="card-body text-center">
+                          <h5 class="card-title">
+                              <span class="name">Donald Trump</span>
+                          </h5>
+                          <p class="card-text text-muted">
+                              <span class="position">President - US</span>
+                              --
+                              <span class="party">Republican</span>
+                          </p>
+                          
+                          <a href="https://twitter.com/justbbarnett">
+                              <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                              </span>
+                          </a>
+                          <a href="https://www.facebook.com/justB.Barnett/">
+                              <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                              </span>
+                          </a>
+                          <a href="gmail.com" class="social email">
+                              <i class="fa fa-email"></i>
+                          </a>
+                          <a href="https://www.linkedin.com/in/justbbarnett/">
+                              <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                              </span>
+                          </a>
+                          <a href="#" class="btn btn-primary">More!</a>
+                      </div>
+                  </div>
+          </div>
+      </div>
+  </div>
+  
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
+
+<script src="assets/js/main.js"></script>
+
+</html>
