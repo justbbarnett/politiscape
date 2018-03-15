@@ -1,0 +1,30 @@
+.nav-logo {
+    max-height: 60px;
+}
+
+.top-form {
+    
+}
+
+body {
+    margin-top: 80px;
+}
+
+
+@media screen and (min-width:768px) /* any screen 768px and higher */ {
+    
+    .navbar {
+        border-radius: 0;
+    }
+    
+    .navbar-header {
+       display: none;
+   }
+   
+   .navbar-nav {
+       
+       float: left;
+       table-layout: fixed;
+       
+   }
+}
