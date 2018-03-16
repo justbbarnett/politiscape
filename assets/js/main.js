@@ -18,23 +18,34 @@ $("form").on("submit", function(e) {
         method: "GET"
       })
         .then(function(response) {
-        
+        console.log(response);
             for (var k = 0; k < response.offices.length; k++) {
+                
                 var position = response.offices[k].name;
                 // person's official position
                 
-                var indices = [];
-                //loop through the offices.officialIndices?
-                indices = response.offices[k].officialIndices;
-                console.log(indices);
+                var officialInd = [];
                 
-                var name = response.officials[indices].name;
-                // person's name
-                var party = response.officials[indices].party;
-                // person's political party
-                var photo = response.officials[indices].photoUrl;
-                // person's photo src
-        
+                for(var m = 0; m < response.offices[k].officialIndices.length; m++) {
+                    
+                    officialInd.push(
+                        {position: position, 
+                        index: response.offices[k].officialIndices[m]}
+                    );   
+                }
+//                console.log(officialInd);
+
+                for (var b = 0; b < officialInd.length; b++){
+                    var indexofName = officialInd[b].index;
+                    
+                    var name = response.officials[indexofName].name;
+                    // person's name
+                    console.log(name);
+                    var party = response.officials[indexofName].party;
+                    // person's political party
+                    var photo = response.officials[indexofName].photoUrl;
+                    // person's photo src
+                
                 var newOfficial = $("<div class='card profile-card'>");
                 // creates a newOfficial variable with a class profile-card
 
@@ -70,7 +81,9 @@ $("form").on("submit", function(e) {
 
                 $(".scrolling-profiles").append(newOfficial);
                 // dynamically creates new cards with each official's data
-            }
+                }
+                
+                }
         
         })
     
