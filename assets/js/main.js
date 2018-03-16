@@ -45,7 +45,7 @@ $("form").on("submit", function(e) {
                     // person's political party
                     
                     if (!response.officials[indexofName].photoUrl) { 
-                        var photo = "../../assets/images/psicon.png";
+                        var photo = "../../assets/images/nophoto.png";
                         // sets the picture url to one of our pictures
                         var officialPhoto = $("<img class='card-img-top img-fluid img-responsive profile-img'>").attr("src", photo);
                         // adds a img with a class card-img-top img-fluid img-responsive profile-img and sets the source to the officials photo from the civic information api
