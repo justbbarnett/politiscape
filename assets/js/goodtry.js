@@ -1,23 +1,15 @@
 $("form").on("submit", function(e) {
     e.preventDefault();
-    // prevents the automatic refresh on submit
     $(".scrolling-profiles").empty();
-    // empties the page so that we can repopulate it with info from a new zip code
     var input = $("#address").val();
-    // sets the user input to a variable so we can check for correct length
-    
     if (input.length != 5) {
-        // validate user input here
-        $("#invalidInputModal").modal();
-        // tell them invalid input with a modal
-        $(".scrolling-profiles").text("Welcome to Politiscape! Please enter a valid 5 digit zip code to see your elected representatives.");
-        // displays the welcome message
+        // validate user input here!!!
+        //tell them invalid input with a modal
+        // clear input field on okay from modal
     }
     else {
         var address = $("#address").val();
-        // sets the user input to a variable so we can pass it into the queryURL
     }
-    
     var apikey = "AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
     var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + address + "&key=" + apikey;
     $.ajax({
@@ -60,6 +52,8 @@ $("form").on("submit", function(e) {
                             var photoSrc = photo
                         }
                     
+                    var buttonCircle = $("<i>")
+                        buttonCircle.addClass("fa fa-circle fa-stack-2x")
                     
 
                     var  socialMedia = response.officials[indexofName].channels
@@ -78,60 +72,42 @@ $("form").on("submit", function(e) {
                             for (sm = 0; sm< socialMedia.length; sm++) {
                                 if (socialMedia[sm].type === "Twitter") {
                                     var twitterID = socialMedia[sm].id
-                                    console.log(twitterID + "  - twitter") 
+                                    console.log(twitterID + "  - twitter")
+                                    // var twitterURL = $("<a href='https://twitter.com/" + twitterID)
+                                    // var twitterBtn = $("<span class='fa-stack fa-lg'>")
+                            
+                                    // var twitterIcon = $("<i>")
+                                    //     twitterIcon.addClass("fa fa-twitter fa-stack-1x fa-inverse")
+                            
+                                    // twitterBtn.append(buttonCircle).append(twitterIcon)
+
+                                    // var twitter = $("<a>")
+                                    //     twitter.attr("href", twitterURL)
+                                    //     twitter.attr("target", "_blank")
+        
+                                    // twitter.append(twitterBtn)
+
                                 }
                                 if (socialMedia[sm].type === "Facebook") {
                                     var facebookID = socialMedia[sm].id
                                     console.log(facebookID + "  - facebook")
+
+                                    var facebookURL = $("<a href='https://facebook.com/" + facebookID)
+
+                                    return facebookURL;
                                 }
+
+                                
                             }
                         }
-
-                    console.log(facebookID + "  - we have a facebookID")
-                    console.log(twitterID  + "  - we have a twitterID")
-
-        //*********Create social media buttons**************
-
-            //****creating the twitter button
-                    var twitterBtn = $("<span class='fa-stack fa-lg'>")
-                        var twitterURL = ("https://twitter.com/" + twitterID)
-                        console.log(facebookURL)
-                        var buttonCircle = $("<i>")
-                            buttonCircle.addClass("fa fa-circle fa-stack-2x")
-                        var twitterIcon = $("<i>")
-                            twitterIcon.addClass("fa fa-twitter fa-stack-1x fa-inverse")
-                
-                        twitterBtn.append(buttonCircle).append(twitterIcon)
-
-                        var twitter = $("<a>")
-                            twitter.attr("href", twitterURL)
-                            twitter.attr("target", "_blank")
-                    twitter.append(twitterBtn)
-
-            //*****creating the facebook button
-                    var facebookBtn = $("<span class='fa-stack fa-lg'>")
-                        var facebookURL = ("https://facebook.com/" + facebookID)
-                        console.log(facebookURL)
-                        var buttonCircle = $("<i>")
-                            buttonCircle.addClass("fa fa-circle fa-stack-2x")
-                        var facebookIcon = $("<i>")
-                            facebookIcon.addClass("fa fa-facebook fa-stack-1x fa-inverse")
-                
-                        facebookBtn.append(buttonCircle).append(facebookIcon)
-
-                        var facebook = $("<a>")
-                            facebook.attr("href", facebookURL)
-                            facebook.attr("target", "_blank")
-                    facebook.append(facebookBtn)
-            
-            //****creating the website button
-                    var url = response.officials[indexofName].urls                        
+                    
+                    
+                        var url = response.officials[indexofName].urls    
                         var websiteBtn = $("<span class='fa-stack fa-lg'>")
                             
                             var websiteIcon = $("<i>")
                                 websiteIcon.addClass("fa fa-user fa-stack-1x fa-inverse")
-                            buttonCircle = $("<i>")
-                                buttonCircle.addClass("fa fa-circle fa-stack-2x")
+                            
                             websiteBtn.append(buttonCircle).append(websiteIcon)
 
                         var website = $("<a>")
@@ -139,6 +115,20 @@ $("form").on("submit", function(e) {
                             website.attr("target", "_blank")
         
                         website.append(websiteBtn)
+
+                        
+                        // var facebookBtn = $("<span class='fa-stack fa-lg'>")
+                    
+                        //     var facebookIcon = $("<i>")
+                        //         facebookIcon.addClass("fa fa-facebook fa-stack-1x fa-inverse")
+                    
+                        //     facebookBtn.append(buttonCircle).append(facebookIcon)
+
+                        //     var facebook = $("<a>")
+                        //         facebook.attr("href", facebookURL)
+                        //         facebook.attr("target", "_blank")
+                        // facebook.append(facebookBtn)
+        
                         
 
 
@@ -154,10 +144,10 @@ $("form").on("submit", function(e) {
                     // adds a h5 with a class card-title with the officials name
                     var officialPosition = $("<p class='card-text text-muted'>").text(position + " --- " + party);
                     // adds a p with a class card-text text-muted with the officials position and party
-                    var officialSocialDiv = $("<div class='social-links' id='"+ name +"'>");
-                        officialSocialDiv.append(twitter)
-                                        .append(facebook)
-                                        .append(website)
+                    var officialSocialDiv = $("<div class='social-links'>");
+                        officialSocialDiv.append(website)
+                                        //  .append(twitter)
+                                        // .append(facebook)
                                         
                     //for loop here
                     // adds a div with a class social-links and an id with the officials name with their specific social media links
