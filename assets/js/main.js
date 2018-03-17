@@ -7,16 +7,11 @@ $("form").on("submit", function(e) {
     // sets the user input to a variable so we can check for correct length
     
     if (input.length != 5) {
-        // validate user input here!!!
+        // validate user input here
+        $("#invalidInputModal").modal();
         // tell them invalid input with a modal
-        $("#exampleModal").modal();
-        // calls the modal to appear
-        $("input").empty();
-        // clear input field on okay from modal
         $(".scrolling-profiles").text("Welcome to Politiscape! Please enter a valid 5 digit zip code to see your elected representatives.");
         // displays the welcome message
-        
-        
     }
     else {
         var address = $("#address").val();
