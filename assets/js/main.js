@@ -20,7 +20,7 @@ $("form").on("submit", function(e) {
     
     var apikey = "AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
     var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + address + "&key=" + apikey;
-    // sets the api to a const and the queryURL to a variable
+    // sets the api to a var and the queryURL to a variable
 
     $.ajax({
         url: queryURL,
@@ -82,7 +82,7 @@ $("form").on("submit", function(e) {
                 var officialPosition = $("<p class='card-text text-muted'>").text(position + " --- " + party);
                 // adds a p with a class card-text text-muted with the officials position and party
 
-                var officialSocialDiv = $("<div class='social-links' id='"+ name +"'>").text();//for loop here
+                var officialSocialDiv = $("<div class='social-links' id='"+ name +"'>");
                 // adds a div with a class social-links and an id with the officials name with their specific social media links
 
                 wrapper.append(officialPhoto);
