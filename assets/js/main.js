@@ -160,12 +160,21 @@ $("form").on("submit", function(e) {
                     // adds a h5 with a class card-title with the officials name
                     var officialPosition = $("<p class='card-text text-muted'>").text(position + " --- " + party);
                     // adds a p with a class card-text text-muted with the officials position and party
+<<<<<<< HEAD
                     var officialSocialDiv = $("<div class='social-links''>");
+=======
+                    var officialSocialDiv = $("<div class='social-links'>");
+>>>>>>> 57923622c9eacb1a872a0d733e8a6eebafc8820f
                         officialSocialDiv.append(twitter)
                                         .append(facebook)
                                         .append(website)
                                         .append(more)
                                         
+<<<<<<< HEAD
+=======
+                                        
+                    //for loop here
+>>>>>>> 57923622c9eacb1a872a0d733e8a6eebafc8820f
                     // adds a div with a class social-links and an id with the officials name with their specific social media links
 
 
