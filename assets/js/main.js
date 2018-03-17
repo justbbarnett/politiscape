@@ -1,15 +1,23 @@
 $("form").on("submit", function(e) {
     e.preventDefault();
+    // prevents the automatic refresh on submit
     $(".scrolling-profiles").empty();
+    // empties the page so that we can repopulate it with info from a new zip code
     var input = $("#address").val();
+    // sets the user input to a variable so we can check for correct length
+    
     if (input.length != 5) {
-        // validate user input here!!!
-        //tell them invalid input with a modal
-        // clear input field on okay from modal
+        // validate user input here
+        $("#invalidInputModal").modal();
+        // tell them invalid input with a modal
+        $(".scrolling-profiles").text("Welcome to Politiscape! Please enter a valid 5 digit zip code to see your elected representatives.");
+        // displays the welcome message
     }
     else {
         var address = $("#address").val();
+        // sets the user input to a variable so we can pass it into the queryURL
     }
+    
     var apikey = "AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
     var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + address + "&key=" + apikey;
     $.ajax({
