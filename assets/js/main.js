@@ -20,72 +20,68 @@ $("form").on("submit", function(e) {
     
     var apikey = "AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
     var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + address + "&key=" + apikey;
+    // sets the api to a var and the queryURL to a variable
+
     $.ajax({
         url: queryURL,
         method: "GET"
       })
-        .then(function(response) {
-        console.log(response);
-            for (var k = 0; k < response.offices.length; k++) {
-                
-                var position = response.offices[k].name;
-                // person's official position
-                
-                var officialInd = [];
-                // create an empty array
-                
-                for(var m = 0; m < response.offices[k].officialIndices.length; m++) {
-                    
-                    officialInd.push(
-                        {position: position, 
-                        index: response.offices[k].officialIndices[m]}
-                    );   
-                    // pushes an object into the empty array
+    .then(function(response) {
+
+        for (var k = 0; k < response.offices.length; k++) {
+
+            var position = response.offices[k].name;
+            // person's official position
+
+            var officialInd = [];
+            // create an empty array
+
+            for(var m = 0; m < response.offices[k].officialIndices.length; m++) {
+
+                officialInd.push(
+                    {position: position, 
+                    index: response.offices[k].officialIndices[m]}
+                );   
+                // pushes an object into the empty array
+            }
+
+            for (var b = 0; b < officialInd.length; b++) {
+                var indexofName = officialInd[b].index;
+                // get's the associated index value
+                var name = response.officials[indexofName].name;
+                // person's name
+                var party = response.officials[indexofName].party;
+                // person's political party
+                var photo = response.officials[indexofName].photoUrl;
+                    // person's photo src
+
+                if (!response.officials[indexofName].photoUrl) {
+                    var photoSrc = "assets/images/nophoto.png"
                 }
-                for (var b = 0; b < officialInd.length; b++) {
-                    var indexofName = officialInd[b].index;
-                    // get's the associated index value
-                    var name = response.officials[indexofName].name;
-                    // person's name
-                    var party = response.officials[indexofName].party;
-                    // person's political party
-                    var photo = response.officials[indexofName].photoUrl;
-                        // person's photo src
-                    
+                else {
+                    var photoSrc = photo
+                }
 
-                        if (!response.officials[indexofName].photoUrl) {
-                            var photoSrc = "assets/images/nophoto.png"
-                        }
-                        else {
-                            var photoSrc = photo
-                        }
-                    
-                    
-             //*********get social media IDs**************           
-                    var  socialMedia = response.officials[indexofName].channels
-                        console.log(socialMedia)
+                var  socialMedia = response.officials[indexofName].channels
 
-                        if (!socialMedia) {
-                            console.log("not very social")
+
+                if (!socialMedia) {
+                    // do nothing
+                }
+                else {
+                    for (sm = 0; sm< socialMedia.length; sm++) {
+                        if (socialMedia[sm].type === "Twitter") {
+                            var twitterID = socialMedia[sm].id
 
                         }
-                        else {
-                            for (sm = 0; sm< socialMedia.length; sm++) {
-                                if (socialMedia[sm].type === "Twitter") {
-                                    var twitterID = socialMedia[sm].id
-                                    console.log(twitterID + "  - twitter") 
-                                }
-                                if (socialMedia[sm].type === "Facebook") {
-                                    var facebookID = socialMedia[sm].id
-                                    console.log(facebookID + "  - facebook")
-                                }
-                            }
+                        if (socialMedia[sm].type === "Facebook") {
+                            var facebookID = socialMedia[sm].id
+
                         }
+                    }
+                }
 
-                    console.log(facebookID + "  - we have a facebookID")
-                    console.log(twitterID  + "  - we have a twitterID")
-
-        //*********Create social media buttons**************
+                //*********Create social media buttons**************
 
             //****creating the twitter button
                     var twitterBtn = $("<span class='fa-stack fa-lg'>")
@@ -170,7 +166,6 @@ $("form").on("submit", function(e) {
                                         .append(website)
                                         .append(more)
                                         
-                    //for loop here
                     // adds a div with a class social-links and an id with the officials name with their specific social media links
 
 
@@ -187,8 +182,18 @@ $("form").on("submit", function(e) {
                     // dynamically creates new cards with each official's data
                 }
                 
-                }
-        
-        })
-    
+                wrapper.append(officialPhoto);
+                // puts the officialPhoto into the wrapper div
+                officialBody.append(officialName)
+                            .append(officialPosition)
+                            .append(officialSocialDiv);
+                // puts the officialName, officialPosition and the officialSocialDiv into the officialBody div
+                newOfficial.append(wrapper)
+                           .append(officialBody);
+                //adds the wrapper with the image and the officialBody to the newOfficial
+                $(".scrolling-profiles").append(newOfficial);
+                // dynamically creates new cards with each official's data
+            }
+        }
+    )
 })
