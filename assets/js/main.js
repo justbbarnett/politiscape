@@ -52,8 +52,6 @@ $("form").on("submit", function(e) {
                             var photoSrc = photo
                         }
                     
-                    var buttonCircle = $("<i>")
-                        buttonCircle.addClass("fa fa-circle fa-stack-2x")
                     
 
                     var  socialMedia = response.officials[indexofName].channels
@@ -73,42 +71,68 @@ $("form").on("submit", function(e) {
                                 if (socialMedia[sm].type === "Twitter") {
                                     var twitterID = socialMedia[sm].id
                                     console.log(twitterID + "  - twitter")
-                                    // var twitterURL = $("<a href='https://twitter.com/" + twitterID)
-                                    // var twitterBtn = $("<span class='fa-stack fa-lg'>")
-                            
-                                    // var twitterIcon = $("<i>")
-                                    //     twitterIcon.addClass("fa fa-twitter fa-stack-1x fa-inverse")
-                            
-                                    // twitterBtn.append(buttonCircle).append(twitterIcon)
 
-                                    // var twitter = $("<a>")
-                                    //     twitter.attr("href", twitterURL)
-                                    //     twitter.attr("target", "_blank")
-        
+                                    // var twitter = $("<a href='https://twitter.com/" + twitterID)
+                                    // var twitterBtn = $("<span class='fa-stack fa-lg'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-inverse'></i></span>")
+
                                     // twitter.append(twitterBtn)
+                                    
 
                                 }
                                 if (socialMedia[sm].type === "Facebook") {
                                     var facebookID = socialMedia[sm].id
                                     console.log(facebookID + "  - facebook")
 
-                                    // var facebook = $("<a href='https://twitter.com/" + twitterID)
-                                    // var facebookBtn = $("<span class='fa-stack fa-lg'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-facebook fa-stack-1x fa-inverse'></i></span>")
-
-                                    // facebook.append(facebookBtn)
+                                    // var facebookURL = $("<a href='https://facebook.com/" + facebookID)
+                                    
+                                    
+                                    
                                 }
 
                                 
                             }
+                            
                         }
+                    console.log(facebookID + "  - we have a facebookID")
+                    console.log(twitterID  + "  - we have a twitterID")
                     
-                    
-                        var url = response.officials[indexofName].urls    
+                    var twitterBtn = $("<span class='fa-stack fa-lg'>")
+                        var twitterURL = ("https://twitter.com/" + twitterID)
+                        console.log(facebookURL)
+                        var buttonCircle = $("<i>")
+                            buttonCircle.addClass("fa fa-circle fa-stack-2x")
+                        var twitterIcon = $("<i>")
+                            twitterIcon.addClass("fa fa-twitter fa-stack-1x fa-inverse")
+                
+                        twitterBtn.append(buttonCircle).append(twitterIcon)
+
+                        var twitter = $("<a>")
+                            twitter.attr("href", twitterURL)
+                            twitter.attr("target", "_blank")
+                    twitter.append(twitterBtn)
+
+                    var facebookBtn = $("<span class='fa-stack fa-lg'>")
+                        var facebookURL = ("https://facebook.com/" + facebookID)
+                        console.log(facebookURL)
+                        var buttonCircle = $("<i>")
+                            buttonCircle.addClass("fa fa-circle fa-stack-2x")
+                        var facebookIcon = $("<i>")
+                            facebookIcon.addClass("fa fa-facebook fa-stack-1x fa-inverse")
+                
+                        facebookBtn.append(buttonCircle).append(facebookIcon)
+
+                        var facebook = $("<a>")
+                            facebook.attr("href", facebookURL)
+                            facebook.attr("target", "_blank")
+                    facebook.append(facebookBtn)
+
+                    var url = response.officials[indexofName].urls                        
                         var websiteBtn = $("<span class='fa-stack fa-lg'>")
                             
                             var websiteIcon = $("<i>")
                                 websiteIcon.addClass("fa fa-user fa-stack-1x fa-inverse")
-                            
+                            buttonCircle = $("<i>")
+                                buttonCircle.addClass("fa fa-circle fa-stack-2x")
                             websiteBtn.append(buttonCircle).append(websiteIcon)
 
                         var website = $("<a>")
@@ -131,10 +155,10 @@ $("form").on("submit", function(e) {
                     // adds a h5 with a class card-title with the officials name
                     var officialPosition = $("<p class='card-text text-muted'>").text(position + " --- " + party);
                     // adds a p with a class card-text text-muted with the officials position and party
-                    var officialSocialDiv = $("<div class='social-links'>");
-                        officialSocialDiv.append(website)
-                                        //  .append(twitter)
-                        //                .append(facebook)
+                    var officialSocialDiv = $("<div class='social-links' id='"+ name +"'>");
+                        officialSocialDiv.append(twitter)
+                                        .append(facebook)
+                                        .append(website)
                                         
                     //for loop here
                     // adds a div with a class social-links and an id with the officials name with their specific social media links
