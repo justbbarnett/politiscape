@@ -70,32 +70,21 @@ $("form").on("submit", function(e) {
                             for (sm = 0; sm< socialMedia.length; sm++) {
                                 if (socialMedia[sm].type === "Twitter") {
                                     var twitterID = socialMedia[sm].id
-                                    console.log(twitterID + "  - twitter")
-
-                                    // var twitter = $("<a href='https://twitter.com/" + twitterID)
-                                    // var twitterBtn = $("<span class='fa-stack fa-lg'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-twitter fa-stack-1x fa-inverse'></i></span>")
-
-                                    // twitter.append(twitterBtn)
-                                    
-
+                                    console.log(twitterID + "  - twitter") 
                                 }
                                 if (socialMedia[sm].type === "Facebook") {
                                     var facebookID = socialMedia[sm].id
                                     console.log(facebookID + "  - facebook")
-
-                                    // var facebookURL = $("<a href='https://facebook.com/" + facebookID)
-                                    
-                                    
-                                    
                                 }
-
-                                
                             }
-                            
                         }
+
                     console.log(facebookID + "  - we have a facebookID")
                     console.log(twitterID  + "  - we have a twitterID")
-                    
+
+        //*********Create social media buttons**************
+
+            //****creating the twitter button
                     var twitterBtn = $("<span class='fa-stack fa-lg'>")
                         var twitterURL = ("https://twitter.com/" + twitterID)
                         console.log(facebookURL)
@@ -111,6 +100,7 @@ $("form").on("submit", function(e) {
                             twitter.attr("target", "_blank")
                     twitter.append(twitterBtn)
 
+            //*****creating the facebook button
                     var facebookBtn = $("<span class='fa-stack fa-lg'>")
                         var facebookURL = ("https://facebook.com/" + facebookID)
                         console.log(facebookURL)
@@ -125,7 +115,8 @@ $("form").on("submit", function(e) {
                             facebook.attr("href", facebookURL)
                             facebook.attr("target", "_blank")
                     facebook.append(facebookBtn)
-
+            
+            //****creating the website button
                     var url = response.officials[indexofName].urls                        
                         var websiteBtn = $("<span class='fa-stack fa-lg'>")
                             
