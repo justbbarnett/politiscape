@@ -145,7 +145,7 @@ $("form").on("submit", function(e) {
                 // adds a h5 with a class card-title with the officials name
                 var officialPosition = $("<p class='card-text text-muted'>").text(position + " --- " + party);
                 // adds a p with a class card-text text-muted with the officials position and party
-                var officialSocialDiv = $("<div class='social-links' id='"+ name +"'>");
+                var officialSocialDiv = $("<div class='social-links'>");
                 // adds a div with a class social-links and an id with the officials name with their specific social media links    
                 officialSocialDiv.append(twitter)
                                  .append(facebook)
