@@ -49,6 +49,32 @@ $("form").on("submit", function(e) {
                 // get's the associated index value
                 var name = response.officials[indexofName].name;
                 // person's name
+                
+                var nameArr = name.split("") //building out array to remove spaces and punctuation for id names
+                    
+
+                    for (var n=0; n< nameArr.length; n++) {
+                        if (nameArr[n] === ".") {
+                            
+                            nameArr.splice ([n], 1)
+                        }
+                        if (nameArr[n] === " ") {
+                            
+                            nameArr[n] = "-";
+                        }
+                        
+                        else {
+                            
+                            nameArr[n] = nameArr[n]
+                        }
+                        
+                    }
+                    console.log(nameArr)
+
+                var nameID = nameArr.join("")
+                    console.log(nameID)
+                    
+                    
                 var party = response.officials[indexofName].party;
                 // person's political party
                 var photo = response.officials[indexofName].photoUrl;
@@ -83,7 +109,6 @@ $("form").on("submit", function(e) {
             //****creating the twitter button
                 var twitterBtn = $("<span class='fa-stack fa-lg'>")
                 var twitterURL = ("https://twitter.com/" + twitterID)
-                    console.log(facebookURL)
                 var buttonCircle = $("<i>")
                     buttonCircle.addClass("fa fa-circle fa-stack-2x")
                 var twitterIcon = $("<i>")
@@ -99,7 +124,6 @@ $("form").on("submit", function(e) {
             //*****creating the facebook button
                 var facebookBtn = $("<span class='fa-stack fa-lg'>")
                 var facebookURL = ("https://facebook.com/" + facebookID)
-                    console.log(facebookURL)
                 var buttonCircle = $("<i>")
                     buttonCircle.addClass("fa fa-circle fa-stack-2x")
                 var facebookIcon = $("<i>")
@@ -114,8 +138,7 @@ $("form").on("submit", function(e) {
             
             //****creating the website button
                 var url = response.officials[indexofName].urls                        
-                var websiteBtn = $("<span class='fa-stack fa-lg'>")
-                            
+                var websiteBtn = $("<span class='fa-stack fa-lg'>")                           
                 var websiteIcon = $("<i>")
                     websiteIcon.addClass("fa fa-user fa-stack-1x fa-inverse")
                 buttonCircle = $("<i>")
@@ -129,66 +152,68 @@ $("form").on("submit", function(e) {
                 website.append(websiteBtn)
             
             //****creating the website button                      
-                    var moreBtn = $("<span class='fa-stack fa-lg'>")
-                    var moreIcon = $("<i>")
-                        moreIcon.addClass("fa fa-newspaper fa-stack-1x fa-inverse")
-                    buttonCircle = $("<i>")
-                        buttonCircle.addClass("fa fa-circle fa-stack-2x")
-                    moreBtn.append(buttonCircle).append(moreIcon)
+                var moreBtn = $("<span class='fa-stack fa-lg'>")
+                    moreBtn.addClass("headlines")
+                    moreBtn.attr ("id", nameID)
+                var moreIcon = $("<i>")
+                    moreIcon.addClass("fa fa-newspaper fa-stack-1x fa-inverse")
+                buttonCircle = $("<i>")
+                    buttonCircle.addClass("fa fa-circle fa-stack-2x")
+                moreBtn.append(buttonCircle).append(moreIcon)
+
+                var nameMore = "#" + nameID
+                var more = $("<a>")
+                more.addClass("moreBtn")
+                
+
+                console.log(nameID)
+                more.append(moreBtn)
+                website.append(websiteBtn)
+
+                var newOfficial = $("<div class='card profile-card'>");
+                // creates a newOfficial variable with a class profile-card
+                var wrapper = $("<div class='imgwrapper'>");
+                // adds a div with a class imgwrapper and an id with the officials name
+                var officialPhoto = $("<img class='card-img-top img-fluid img-responsive profile-img'>").attr("src", photoSrc);
+                // adds a img with a class card-img-top img-fluid img-responsive profile-img and sets the source to the officials photo from the civic information api
+                var officialBody = $("<div class='card-body text-center'>");
+                // adds a div with a class card-body text-center for formatting
+                var officialName = $("<h5 class='card-title'>").text(name);
+                // adds a h5 with a class card-title with the officials name
+                var officialPosition = $("<p class='card-text text-muted'>").text(position + " --- " + party);
+                // adds a p with a class card-text text-muted with the officials position and party
+
+                var officialSocialDiv = $("<div class='social-links'>");
+                    officialSocialDiv.addClass(nameID)
+                    // officialSocialDiv.attr("id", name)
+                    officialSocialDiv.append(twitter)
+                                    .append(facebook)
+                                    .append(website)
+                                    .append(more)
+                // adds a div with a class social-links and an id with the officials name with their specific social media links
 
 
-                    var moreID = name.trim() + "-button"
-                    var more = $("<a>")
-                    more.addClass("moreBtn")
-                    // more.attr("id", moreID) //adding iD for ease of GET on second API
-                    // more.attr("href", url)
-                    // more.attr("target", "_blank")
-
-                    console.log(moreID)
-                    more.append(moreBtn)
-                    website.append(websiteBtn)
-
-                    var newOfficial = $("<div class='card profile-card'>");
-                    // creates a newOfficial variable with a class profile-card
-                    var wrapper = $("<div class='imgwrapper'>");
-                    // adds a div with a class imgwrapper and an id with the officials name
-                    var officialPhoto = $("<img class='card-img-top img-fluid img-responsive profile-img'>").attr("src", photoSrc);
-                    // adds a img with a class card-img-top img-fluid img-responsive profile-img and sets the source to the officials photo from the civic information api
-                    var officialBody = $("<div class='card-body text-center'>");
-                    // adds a div with a class card-body text-center for formatting
-                    var officialName = $("<h5 class='card-title'>").text(name);
-                    // adds a h5 with a class card-title with the officials name
-                    var officialPosition = $("<p class='card-text text-muted'>").text(position + " --- " + party);
-                    // adds a p with a class card-text text-muted with the officials position and party
-
-                    var officialSocialDiv = $("<div class='social-links'>");
-                        // officialSocialDiv.attr("id", name)
-                        officialSocialDiv.append(twitter)
-                                        .append(facebook)
-                                        .append(website)
-                                        .append(more)
-                    // adds a div with a class social-links and an id with the officials name with their specific social media links
-
-
-                    wrapper.append(officialPhoto);
-                    // puts the officialPhoto into the wrapper div
-                    officialBody.append(officialName)
-                                .append(officialPosition)
-                                .append(officialSocialDiv);
-                    // puts the officialName, officialPosition and the officialSocialDiv into the officialBody div
-                    newOfficial.append(wrapper)
-                               .append(officialBody);
-                    //adds the wrapper with the image and the officialBody to the newOfficial
-                    $(".scrolling-profiles").append(newOfficial);
-                    // dynamically creates new cards with each official's data
+                wrapper.append(officialPhoto);
+                // puts the officialPhoto into the wrapper div
+                officialBody.append(officialName)
+                            .append(officialPosition)
+                            .append(officialSocialDiv);
+                // puts the officialName, officialPosition and the officialSocialDiv into the officialBody div
+                newOfficial.append(wrapper)
+                            .append(officialBody);
+                //adds the wrapper with the image and the officialBody to the newOfficial
+                $(".scrolling-profiles").append(newOfficial);
+                // dynamically creates new cards with each official's data
                 
             } //ends for loop on line 38
 
         } // ends for loop on line 30
 
-        $(".moreBtn").on("click", function (){
+        $("." + nameID).on("click", function (){
+            
             var moreDiv = $("<div>")
                 moreDiv.addClass("moreDiv")
+            
             var moreLinksList = $("<ul>")
             var moreLinks = $("<li>")
                 moreLinks.text("test test test")
@@ -196,7 +221,8 @@ $("form").on("submit", function(e) {
             moreLinksList.append(moreLinks)
             moreDiv.append(moreLinksList)
 
-            $(".social-links").append(moreDiv)
+            $("." + nameID).append(moreDiv)
+            console.log("." + nameID);
         });
          
     }) //ends $.ajax on line 25
