@@ -221,7 +221,7 @@ $("form").on("submit", function (e) {
             moreLinksList.append(moreLinks)
             moreDiv.append(moreLinksList)
 
-            console.log("." + headlinesID)
+            console.log(headlinesID)
             $("#" + headlinesID).append(moreDiv)
             console.log("." + nameID);
         });
