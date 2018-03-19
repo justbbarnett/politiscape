@@ -69,12 +69,10 @@ $("form").on("submit", function(e) {
                         }
                         
                     }
-                    console.log(nameArr)
+                   
 
                 var nameHandle = nameArr.join("")
-                    console.log(nameHandle)
-                    
-                    
+ 
                 var party = response.officials[indexofName].party;
                 // person's political party
                 var photo = response.officials[indexofName].photoUrl;
@@ -151,9 +149,10 @@ $("form").on("submit", function(e) {
 
                 website.append(websiteBtn)
             
-            //****creating the website button                      
+            //****creating the headlines button                      
                 var moreBtn = $("<span class='fa-stack fa-lg'>")
                     moreBtn.addClass("headlines")
+                    moreBtn.attr("value", nameHandle)
                     moreBtn
                 var moreIcon = $("<i>")
                     moreIcon.addClass("fa fa-newspaper fa-stack-1x fa-inverse")
@@ -165,17 +164,12 @@ $("form").on("submit", function(e) {
                 var nameClass = "." + nameHandle
                 var nameID = "#" + nameHandle
 
-                var moreDiv = $("<div>")
-                moreDiv.addClass("moreDiv").addClass(nameHandle)
 
                 var more = $("<a>")
-                more.addClass("moreBtn").attr ("value", nameHandle)
-                // more.append(moreDiv)
+                more.addClass("moreBtn").attr ("value", nameHandle).attr("id", nameHandle)
                 
-
-                console.log(nameID + " ID is specified with punctuation")
                 more.append(moreBtn)
-                website.append(websiteBtn)
+                
 
                 var newOfficial = $("<div class='card profile-card'>");
                 // creates a newOfficial variable with a class profile-card
@@ -184,7 +178,6 @@ $("form").on("submit", function(e) {
                 var officialPhoto = $("<img class='card-img-top img-fluid img-responsive profile-img'>").attr("src", photoSrc);
                 // adds a img with a class card-img-top img-fluid img-responsive profile-img and sets the source to the officials photo from the civic information api
                 var officialBody = $("<div class='card-body text-center'>");
-                    officialBody.attr("id", nameHandle)
                 // adds a div with a class card-body text-center for formatting
                 var officialName = $("<h5 class='card-title'>").text(name);
                 // adds a h5 with a class card-title with the officials name
@@ -193,12 +186,11 @@ $("form").on("submit", function(e) {
 
                 var officialSocialDiv = $("<div class='social-links'>");
                     officialSocialDiv.addClass(nameHandle)
-                    // officialSocialDiv.attr("id", name)
                     officialSocialDiv.append(twitter)
                                     .append(facebook)
                                     .append(website)
                                     .append(more)
-                                    .append(moreDiv)
+                                    
                 // adds a div with a class social-links and an id with the officials name with their specific social media links
 
 
@@ -212,29 +204,34 @@ $("form").on("submit", function(e) {
                             .append(officialBody);
                 //adds the wrapper with the image and the officialBody to the newOfficial
                 $(".scrolling-profiles").append(newOfficial);
-                // dynamically creates new cards with each official's data
-
+                // dynamically creates new cards with each official's data   
                 
-                
-            } //ends for loop on line 38
-
-            $(nameID).on("click", function (){
+            } //ends for loop on line 47
             
-                var moreLinksList = $("<ul>")
-                var moreLinks = $("<li>")
-                    moreLinks.text("test test test")
-                
-                moreLinksList.append(moreLinks)
-                moreDiv.append(moreLinksList)
-    
-                $(nameClass).append(moreDiv)
-                console.log(nameClass+ "console logging the moreDiv");
-            });
-            
-
         } // ends for loop on line 30
 
-       
+        $(".headlines").on("click", function () {
+
+            var headlinesdivID = $(this).attr('value') // Grabs ID of specific button clicked so headlines div can be added to the right
+            var headlinesID = $(this).attr('value') + "headlines" // Grabs the ID of the specific button clicked
+
+            // Creating div to hold list of headlines
+            var moreDiv = $("<div>")
+            moreDiv.attr("id", headlinesID)
+
+            // Creating list of headlines
+            var moreLinksList = $("<ul>")
+            var moreLinks = $("<li>")
+            moreLinks.text("test test test")
+
+            // Appends individual links to list, and appends list to the div
+            moreLinksList.append(moreLinks)
+
+            console.log(headlinesID)
+            $("#" + headlinesdivID).append(moreDiv)
+            $("#" + headlinesID).html(moreLinksList)
+            
+        });
          
     }) //ends $.ajax on line 25
 
