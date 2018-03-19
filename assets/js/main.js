@@ -218,14 +218,28 @@ $("form").on("submit", function (e) {
 
             // Creating list of headlines
             var headlinesList = $("<ul>")
-            var headlineLink = $("<li>")
-            headlineLink.text("test test test")
 
-            // Appends individual links to list, and appends list to the div
-            headlinesList.append(headlineLink)
-            
 
-            console.log(headlinesDiv)
+            var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=96a8c512eae346c58a56d7649ea2eef2";
+            queryURL += ('&q="' + cardClickedID + '"')
+            queryURL += "&news_desk:('Politics')&sort=newest"
+
+
+            $.get(queryURL)
+                .then(function (response) {
+                    console.log(response)
+                    // $("#" + headlinesDivID).html("<p>NYT Headlines: </p>")
+                    for (var i = 0; i < 3; i++) {
+                        headlinesList.append("<li><a target='_blank' href='" + response.response.docs[i].web_url + "'>" + response.response.docs[i].headline.main + "</a><br>")
+                        // $(".headlines").append("<a target='_blank' href='" + response.articles[i].url + "'>" + response.articles[i].title + "</a><br>")
+                        
+                    }
+
+                })
+
+
+
+
 
             console.log(headlinesDivID)
             $("#" + cardClickedID).append(headlinesDiv) //Appends the headlines div to the clicked-on card body
