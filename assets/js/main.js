@@ -173,6 +173,8 @@ $("form").on("submit", function (e) {
                 // adds a img with a class card-img-top img-fluid img-responsive profile-img and sets the source to the officials photo from the civic information api
                 var officialBody = $("<div class='card-body text-center'>");
                 // adds a div with a class card-body text-center for formatting
+                officialBody.attr("id", nameID)
+                // adds name to the official body so that headlines can be appended to correct place
                 var officialName = $("<h5 class='card-title'>").text(name);
                 // adds a h5 with a class card-title with the officials name
                 var officialPosition = $("<p class='card-text text-muted'>").text(position + " --- " + party);
@@ -180,7 +182,7 @@ $("form").on("submit", function (e) {
 
                 var officialSocialDiv = $("<div class='social-links'>");
                 officialSocialDiv.addClass(nameID)
-                // officialSocialDiv.attr("id", name)
+                officialSocialDiv.attr("id", name)
                 officialSocialDiv.append(twitter)
                     .append(facebook)
                     .append(website)
@@ -206,6 +208,7 @@ $("form").on("submit", function (e) {
 
         $(".headlines").on("click", function () {
 
+            var headlinesdivID = $(this).attr('id') // Grabs ID of specific button clicked so headlines div can be added to the right
             var headlinesID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
 
             // Creating div to hold list of headlines
@@ -219,10 +222,13 @@ $("form").on("submit", function (e) {
 
             // Appends individual links to list, and appends list to the div
             moreLinksList.append(moreLinks)
-            moreDiv.append(moreLinksList)
+            // moreDiv.append(moreLinksList)
+
+            console.log(moreDiv)
 
             console.log(headlinesID)
-            $("#" + headlinesID).append(moreDiv)
+            $("#" + headlinesdivID).append(moreDiv)
+            $("#" + headlinesID).html(moreLinksList)
             console.log("." + nameID);
         });
 
