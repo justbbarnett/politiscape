@@ -208,27 +208,28 @@ $("form").on("submit", function (e) {
 
         $(".headlines").on("click", function () {
 
-            var headlinesdivID = $(this).attr('id') // Grabs ID of specific button clicked so headlines div can be added to the right
-            var headlinesID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
+            var cardClickedID = $(this).attr('id') // Grabs ID of specific button's card clicked so headlines div can be added to the right card
+            var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
 
             // Creating div to hold list of headlines
-            var moreDiv = $("<div>")
-            moreDiv.attr("id", headlinesID)
+            var headlinesDiv = $("<div>")
+            // Gives that div a specific ID
+            headlinesDiv.attr("id", headlinesDivID)
 
             // Creating list of headlines
-            var moreLinksList = $("<ul>")
-            var moreLinks = $("<li>")
-            moreLinks.text("test test test")
+            var headlinesList = $("<ul>")
+            var headlineLink = $("<li>")
+            headlineLink.text("test test test")
 
             // Appends individual links to list, and appends list to the div
-            moreLinksList.append(moreLinks)
-            // moreDiv.append(moreLinksList)
+            headlinesList.append(headlineLink)
+            
 
-            console.log(moreDiv)
+            console.log(headlinesDiv)
 
-            console.log(headlinesID)
-            $("#" + headlinesdivID).append(moreDiv)
-            $("#" + headlinesID).html(moreLinksList)
+            console.log(headlinesDivID)
+            $("#" + cardClickedID).append(headlinesDiv) //Appends the headlines div to the clicked-on card body
+            $("#" + headlinesDivID).html(headlinesList) // Appends headlines to the newly created headlinesDiv
             console.log("." + nameID);
         });
 
