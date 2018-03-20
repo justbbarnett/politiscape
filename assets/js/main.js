@@ -152,7 +152,7 @@ $("form").on("submit", function (e) {
 
                 website.append(websiteBtn)
 
-                //****creating the website button                      
+                //****creating the headlines button                      
                 var moreBtn = $("<span class='fa-stack fa-lg'>")
                 moreBtn.addClass("headlines")
                 moreBtn.attr("id", nameID)
@@ -160,7 +160,6 @@ $("form").on("submit", function (e) {
                 moreIcon.addClass("fa fa-newspaper fa-stack-1x fa-inverse")
                 buttonCircle = $("<i>")
                 buttonCircle.addClass("fa fa-circle fa-stack-2x")
-                buttonCircle.attr("style", "color: rgb(168, 14, 14)")
                 moreBtn.append(buttonCircle).append(moreIcon)
 
                 var nameMore = "#" + nameID

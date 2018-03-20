@@ -88,3 +88,11 @@ ul {
  -webkit-appearance: none;
  margin: 0;
 }
+
+.headlines .fa-circle {
+    color: rgb(168, 14, 14);
+}
+
+.headlines:hover {
+    cursor: pointer;
+}
