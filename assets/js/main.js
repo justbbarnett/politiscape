@@ -1,4 +1,4 @@
-+(function () {
+(function () {
 $("form").on("submit", function (e) {
     e.preventDefault();
     // prevents the automatic refresh on submit
