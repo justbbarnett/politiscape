@@ -2,9 +2,24 @@
     max-height: 60px;
 }
 
+.bg-light {
+    background-color: gray;
+}
+
+.heading {
+    color: white;
+    -webkit-text-stroke: 1px rgba(128, 128, 128, 0.603);
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 50px;
+    
+}
+
 .welcome {
     margin-left: auto;
     margin-right: auto;
+    /* background-color: gray; */
+    
 }
 
 .welcome-image {
@@ -66,13 +81,10 @@ body {
 
 ul {
     margin-top: 28px;
-<<<<<<< HEAD
-=======
 }
 
 .no-spinners::-webkit-outer-spin-button,
 .no-spinners::-webkit-inner-spin-button {
  -webkit-appearance: none;
  margin: 0;
->>>>>>> f9e4631edb3b8db3be3a53e91721ee664b08fa85
 }
