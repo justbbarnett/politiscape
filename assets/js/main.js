@@ -10,8 +10,12 @@ $("form").on("submit", function (e) {
         // validate user input here
         $("#invalidInputModal").modal();
         // tell them invalid input with a modal
-        $(".scrolling-profiles").text("Welcome to Politiscape! Please enter a valid 5 digit zip code to see your elected representatives.");
-        // displays the welcome message
+        $(".scrolling-profiles").append("<div class='jumbotron welcome'>")
+            $(".jumbotron").append("<img class='display-4 text-center welcome-image' alt='logo' src='assets/images/politiscape.png'>")
+                           .append("<p class='lead'>Politics are crazy enough, especially if you don't even know the people representing you.</p>")
+                           .append("<hr class='my-4'>")
+                           .append("<p>Please enter a valid 5 digit zip-code to see the politicians for that area.</p>")
+        // displays the error welcome message
     } else {
         var address = $("#address").val();
         // sets the user input to a variable so we can pass it into the queryURL
