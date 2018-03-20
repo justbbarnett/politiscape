@@ -53,8 +53,8 @@ $("form").on("submit", function (e) {
                 var name = response.officials[indexofName].name;
                 // person's name
 
-                var nameArr = name.split("") //building out array to remove spaces and punctuation for id names
-
+                var nameArr = name.split("") 
+                //building out array to remove spaces and punctuation for id names
 
                 for (var n = 0; n < nameArr.length; n++) {
                     if (nameArr[n] === ".") {
@@ -70,11 +70,8 @@ $("form").on("submit", function (e) {
                     }
 
                 }
-                console.log(nameArr)
 
                 var nameID = nameArr.join("")
-                console.log(nameID)
-
 
                 var party = response.officials[indexofName].party;
                 // person's political party
@@ -164,7 +161,6 @@ $("form").on("submit", function (e) {
                 var more = $("<a>")
                 more.addClass("moreBtn")
 
-
                 console.log(nameID)
                 more.append(moreBtn)
                 website.append(websiteBtn)
@@ -193,7 +189,6 @@ $("form").on("submit", function (e) {
                     .append(more)
                 // adds a div with a class social-links and an id with the officials name with their specific social media links
 
-
                 wrapper.append(officialPhoto);
                 // puts the officialPhoto into the wrapper div
                 officialBody.append(officialName)
@@ -206,9 +201,9 @@ $("form").on("submit", function (e) {
                 $(".scrolling-profiles").append(newOfficial);
                 // dynamically creates new cards with each official's data
 
-            } //ends for loop on line 38
+            } //ends for loop on line 50
 
-        } // ends for loop on line 30
+        } // ends for loop on line 33
 
         $(".headlines").on("click", function () {
 
@@ -223,32 +218,23 @@ $("form").on("submit", function (e) {
             // Creating list of headlines
             var headlinesList = $("<ul>")
 
+            var nextQueryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=96a8c512eae346c58a56d7649ea2eef2";
+            nextQueryURL += ('&q="' + cardClickedID + '"')
+            nextQueryURL += "&news_desk:('Politics')&sort=newest"
 
-            var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=96a8c512eae346c58a56d7649ea2eef2";
-            queryURL += ('&q="' + cardClickedID + '"')
-            queryURL += "&news_desk:('Politics')&sort=newest"
-
-
-            $.get(queryURL)
-                .then(function (response) {
-                    console.log(response)
+            $.get(nextQueryURL)
+                .then(function (r) {
+                    console.log(r)
                     // $("#" + headlinesDivID).html("<p>NYT Headlines: </p>")
                     for (var i = 0; i < 3; i++) {
-                        headlinesList.append("<li><a target='_blank' href='" + response.response.docs[i].web_url + "'>" + response.response.docs[i].headline.main + "</a><br>")
-                        // $(".headlines").append("<a target='_blank' href='" + response.articles[i].url + "'>" + response.articles[i].title + "</a><br>")
-
+                        headlinesList.append("<li><a target='_blank' href='" + r.response.docs[i].web_url + "'>" + r.response.docs[i].headline.main + "</a><br>")
                     }
 
                 })
 
-
-
-
-
-            console.log(headlinesDivID)
             $("#" + cardClickedID).append(headlinesDiv) //Appends the headlines div to the clicked-on card body
             $("#" + headlinesDivID).html(headlinesList) // Appends headlines to the newly created headlinesDiv
-            console.log("." + nameID);
+            
         });
 
     }) //ends $.ajax on line 25
