@@ -1,23 +1,22 @@
-$("form").on("submit", function(e) {
+$("form").on("submit", function (e) {
     e.preventDefault();
     // prevents the automatic refresh on submit
     $(".scrolling-profiles").empty();
     // empties the page so that we can repopulate it with info from a new zip code
     var input = $("#address").val();
     // sets the user input to a variable so we can check for correct length
-    
+
     if (input.length != 5) {
         // validate user input here
         $("#invalidInputModal").modal();
         // tell them invalid input with a modal
         $(".scrolling-profiles").text("Welcome to Politiscape! Please enter a valid 5 digit zip code to see your elected representatives.");
         // displays the welcome message
-    }
-    else {
+    } else {
         var address = $("#address").val();
         // sets the user input to a variable so we can pass it into the queryURL
     }
-    
+
     var apikey = "AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
     var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + address + "&key=" + apikey;
     // sets the api to a var and the queryURL to a variable
@@ -25,7 +24,7 @@ $("form").on("submit", function(e) {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
 
         for (var k = 0; k < response.offices.length; k++) {
 
@@ -35,12 +34,12 @@ $("form").on("submit", function(e) {
             var officialInd = [];
             // create an empty array
 
-            for(var m = 0; m < response.offices[k].officialIndices.length; m++) {
+            for (var m = 0; m < response.offices[k].officialIndices.length; m++) {
 
-                officialInd.push(
-                    {position: position, 
-                    index: response.offices[k].officialIndices[m]}
-                );   
+                officialInd.push({
+                    position: position,
+                    index: response.offices[k].officialIndices[m]
+                });
                 // pushes an object into the empty array
             }
 
@@ -49,50 +48,48 @@ $("form").on("submit", function(e) {
                 // get's the associated index value
                 var name = response.officials[indexofName].name;
                 // person's name
-                
+
                 var nameArr = name.split("") //building out array to remove spaces and punctuation for id names
-                    
 
-                    for (var n=0; n< nameArr.length; n++) {
-                        if (nameArr[n] === ".") {
-                            
-                            nameArr.splice ([n], 1)
-                        }
-                        if (nameArr[n] === " ") {
-                            
-                            nameArr[n] = "-";
-                        }
-                        
-                        else {
-                            
-                            nameArr[n] = nameArr[n]
-                        }
-                        
+
+                for (var n = 0; n < nameArr.length; n++) {
+                    if (nameArr[n] === ".") {
+
+                        nameArr.splice([n], 1)
                     }
-                   
+                    if (nameArr[n] === " ") {
 
-                var nameHandle = nameArr.join("")
- 
+                        nameArr[n] = "-";
+                    } else {
+
+                        nameArr[n] = nameArr[n]
+                    }
+
+                }
+                console.log(nameArr)
+
+                var nameID = nameArr.join("")
+                console.log(nameID)
+
+
                 var party = response.officials[indexofName].party;
                 // person's political party
                 var photo = response.officials[indexofName].photoUrl;
-                    // person's photo src
+                // person's photo src
 
                 if (!response.officials[indexofName].photoUrl) {
                     var photoSrc = "assets/images/nophoto.png"
-                }
-                else {
+                } else {
                     var photoSrc = photo
                 }
 
-                var  socialMedia = response.officials[indexofName].channels
+                var socialMedia = response.officials[indexofName].channels
 
 
                 if (!socialMedia) {
                     // do nothing
-                }
-                else {
-                    for (sm = 0; sm< socialMedia.length; sm++) {
+                } else {
+                    for (sm = 0; sm < socialMedia.length; sm++) {
                         if (socialMedia[sm].type === "Twitter") {
                             var twitterID = socialMedia[sm].id
                         }
@@ -102,74 +99,71 @@ $("form").on("submit", function(e) {
                     }
                 }
 
-            //*********Create social media buttons**************
+                //*********Create social media buttons**************
 
-            //****creating the twitter button
+                //****creating the twitter button
                 var twitterBtn = $("<span class='fa-stack fa-lg'>")
                 var twitterURL = ("https://twitter.com/" + twitterID)
                 var buttonCircle = $("<i>")
-                    buttonCircle.addClass("fa fa-circle fa-stack-2x")
+                buttonCircle.addClass("fa fa-circle fa-stack-2x")
                 var twitterIcon = $("<i>")
-                    twitterIcon.addClass("fab fa-twitter fa-stack-1x fa-inverse")
-                
+                twitterIcon.addClass("fab fa-twitter fa-stack-1x fa-inverse")
+
                 twitterBtn.append(buttonCircle).append(twitterIcon)
 
                 var twitter = $("<a>")
-                    twitter.attr("href", twitterURL)
-                    twitter.attr("target", "_blank")
+                twitter.attr("href", twitterURL)
+                twitter.attr("target", "_blank")
                 twitter.append(twitterBtn)
 
-            //*****creating the facebook button
+                //*****creating the facebook button
                 var facebookBtn = $("<span class='fa-stack fa-lg'>")
                 var facebookURL = ("https://facebook.com/" + facebookID)
                 var buttonCircle = $("<i>")
-                    buttonCircle.addClass("fa fa-circle fa-stack-2x")
+                buttonCircle.addClass("fa fa-circle fa-stack-2x")
                 var facebookIcon = $("<i>")
-                    facebookIcon.addClass("fab fa-facebook-f fa-stack-1x fa-inverse")
-                
+                facebookIcon.addClass("fab fa-facebook-f fa-stack-1x fa-inverse")
+
                 facebookBtn.append(buttonCircle).append(facebookIcon)
 
                 var facebook = $("<a>")
-                    facebook.attr("href", facebookURL)
-                    facebook.attr("target", "_blank")
+                facebook.attr("href", facebookURL)
+                facebook.attr("target", "_blank")
                 facebook.append(facebookBtn)
-            
-            //****creating the website button
-                var url = response.officials[indexofName].urls                        
-                var websiteBtn = $("<span class='fa-stack fa-lg'>")                           
+
+                //****creating the website button
+                var url = response.officials[indexofName].urls
+                var websiteBtn = $("<span class='fa-stack fa-lg'>")
                 var websiteIcon = $("<i>")
-                    websiteIcon.addClass("fa fa-user fa-stack-1x fa-inverse")
+                websiteIcon.addClass("fa fa-user fa-stack-1x fa-inverse")
                 buttonCircle = $("<i>")
-                    buttonCircle.addClass("fa fa-circle fa-stack-2x")
+                buttonCircle.addClass("fa fa-circle fa-stack-2x")
                 websiteBtn.append(buttonCircle).append(websiteIcon)
 
                 var website = $("<a>")
-                    website.attr("href", url)
-                    website.attr("target", "_blank")
+                website.attr("href", url)
+                website.attr("target", "_blank")
 
                 website.append(websiteBtn)
-            
-            //****creating the headlines button                      
+
+                //****creating the website button                      
                 var moreBtn = $("<span class='fa-stack fa-lg'>")
-                    moreBtn.addClass("headlines")
-                    moreBtn.attr("value", nameHandle)
-                    moreBtn
+                moreBtn.addClass("headlines")
+                moreBtn.attr("id", nameID)
                 var moreIcon = $("<i>")
-                    moreIcon.addClass("fa fa-newspaper fa-stack-1x fa-inverse")
+                moreIcon.addClass("fa fa-newspaper fa-stack-1x fa-inverse")
                 buttonCircle = $("<i>")
-                    buttonCircle.addClass("fa fa-circle fa-stack-2x")
+                buttonCircle.addClass("fa fa-circle fa-stack-2x")
                 moreBtn.append(buttonCircle).append(moreIcon)
 
-
-                var nameClass = "." + nameHandle
-                var nameID = "#" + nameHandle
-
-
+                var nameMore = "#" + nameID
                 var more = $("<a>")
-                more.addClass("moreBtn").attr ("value", nameHandle).attr("id", nameHandle)
-                
+                more.addClass("moreBtn")
+
+
+                console.log(nameID)
                 more.append(moreBtn)
-                
+                website.append(websiteBtn)
 
                 var newOfficial = $("<div class='card profile-card'>");
                 // creates a newOfficial variable with a class profile-card
@@ -179,60 +173,80 @@ $("form").on("submit", function(e) {
                 // adds a img with a class card-img-top img-fluid img-responsive profile-img and sets the source to the officials photo from the civic information api
                 var officialBody = $("<div class='card-body text-center'>");
                 // adds a div with a class card-body text-center for formatting
+                officialBody.attr("id", nameID)
+                // adds name to the official body so that headlines can be appended to correct place
                 var officialName = $("<h5 class='card-title'>").text(name);
                 // adds a h5 with a class card-title with the officials name
                 var officialPosition = $("<p class='card-text text-muted'>").text(position + " --- " + party);
                 // adds a p with a class card-text text-muted with the officials position and party
 
                 var officialSocialDiv = $("<div class='social-links'>");
-                    officialSocialDiv.addClass(nameHandle)
-                    officialSocialDiv.append(twitter)
-                                    .append(facebook)
-                                    .append(website)
-                                    .append(more)
-                                    
+                officialSocialDiv.addClass(nameID)
+                officialSocialDiv.attr("id", name)
+                officialSocialDiv.append(twitter)
+                    .append(facebook)
+                    .append(website)
+                    .append(more)
                 // adds a div with a class social-links and an id with the officials name with their specific social media links
 
 
                 wrapper.append(officialPhoto);
                 // puts the officialPhoto into the wrapper div
                 officialBody.append(officialName)
-                            .append(officialPosition)
-                            .append(officialSocialDiv);
+                    .append(officialPosition)
+                    .append(officialSocialDiv);
                 // puts the officialName, officialPosition and the officialSocialDiv into the officialBody div
                 newOfficial.append(wrapper)
-                            .append(officialBody);
+                    .append(officialBody);
                 //adds the wrapper with the image and the officialBody to the newOfficial
                 $(".scrolling-profiles").append(newOfficial);
-                // dynamically creates new cards with each official's data   
-                
-            } //ends for loop on line 47
-            
+                // dynamically creates new cards with each official's data
+
+            } //ends for loop on line 38
+
         } // ends for loop on line 30
 
         $(".headlines").on("click", function () {
 
-            var headlinesdivID = $(this).attr('value') // Grabs ID of specific button clicked so headlines div can be added to the right
-            var headlinesID = $(this).attr('value') + "headlines" // Grabs the ID of the specific button clicked
+            var cardClickedID = $(this).attr('id') // Grabs ID of specific button's card clicked so headlines div can be added to the right card
+            var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
 
             // Creating div to hold list of headlines
-            var moreDiv = $("<div>")
-            moreDiv.attr("id", headlinesID)
+            var headlinesDiv = $("<div class='text-left'>")
+            // Gives that div a specific ID
+            headlinesDiv.attr("id", headlinesDivID)
 
             // Creating list of headlines
-            var moreLinksList = $("<ul>")
-            var moreLinks = $("<li>")
-            moreLinks.text("test test test")
+            var headlinesList = $("<ul>")
 
-            // Appends individual links to list, and appends list to the div
-            moreLinksList.append(moreLinks)
 
-            console.log(headlinesID)
-            $("#" + headlinesdivID).append(moreDiv)
-            $("#" + headlinesID).html(moreLinksList)
-            
+            var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=96a8c512eae346c58a56d7649ea2eef2";
+            queryURL += ('&q="' + cardClickedID + '"')
+            queryURL += "&news_desk:('Politics')&sort=newest"
+
+
+            $.get(queryURL)
+                .then(function (response) {
+                    console.log(response)
+                    // $("#" + headlinesDivID).html("<p>NYT Headlines: </p>")
+                    for (var i = 0; i < 3; i++) {
+                        headlinesList.append("<li><a target='_blank' href='" + response.response.docs[i].web_url + "'>" + response.response.docs[i].headline.main + "</a><br>")
+                        // $(".headlines").append("<a target='_blank' href='" + response.articles[i].url + "'>" + response.articles[i].title + "</a><br>")
+
+                    }
+
+                })
+
+
+
+
+
+            console.log(headlinesDivID)
+            $("#" + cardClickedID).append(headlinesDiv) //Appends the headlines div to the clicked-on card body
+            $("#" + headlinesDivID).html(headlinesList) // Appends headlines to the newly created headlinesDiv
+            console.log("." + nameID);
         });
-         
+
     }) //ends $.ajax on line 25
 
 }) //ends "form on line 1
