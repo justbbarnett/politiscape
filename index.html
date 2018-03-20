@@ -6,8 +6,6 @@
     <title>Politiscape</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Scrolling Politicians</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/scrolling.css" />
@@ -22,7 +20,7 @@
 <body>
 
     <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="main.html">
+        <a class="navbar-brand" href="index.html">
       <img class="nav-logo" alt="logo" src="assets/images/politiscape.png">
     </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +33,7 @@
 
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-xs-1"  id="address" type="number" placeholder="Your Zip Code" pattern="[0-9]{5}" aria-label="zipcode">
+                <input class="form-control mr-xs-1 address"  id="address" type="number" placeholder="Your Zip Code" pattern="[0-9]{5}" aria-label="zipcode">
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Zip</button>
             </form>
         </div>
@@ -43,14 +41,18 @@
 
     <div class="row">
         <div class="container">
-            <div class="col-md-8 mx-auto scrolling-profiles headlines">
+            <div class="col-md-8 mx-auto scrolling-profiles">
               <div class="jumbotron welcome">
-                <!-- <h1 class="display-4 text-center">Hello, world!</h1> -->
-                <img class="display-4 text-center welcome-image" alt="logo" src="assets/images/politiscape.png">
+               <h1 class="display-4 text-center">
+                <img class="display-4 mx-auto welcome-image" alt="logo" src="assets/images/politiscape.png"> </h1>
                 <p class="lead">Politics are crazy enough, especially if you don't even know these people representing you.</p>
                 <hr class="my-4">
                 <p>We wanted to make it easy to find the people who are making the decisions about your life by just entering your zip-code.</p>
-              </div>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-xs-1 address" type="number" placeholder="Your Zip Code" pattern="[0-9]{5}" aria-label="zipcode">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Zip</button>
+                </form>
+            </div>
             </div>
         </div>
     </div>
@@ -80,8 +82,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
-
 <script src="assets/js/main.js"></script>
-<!-- <script src="assets/js/headlines.js"></script> -->
+
 
 </html>

@@ -3,22 +3,31 @@ $("form").on("submit", function (e) {
     // prevents the automatic refresh on submit
     $(".scrolling-profiles").empty();
     // empties the page so that we can repopulate it with info from a new zip code
-    var input = $("#address").val();
+    var input = $(this).find(".address").val();
     // sets the user input to a variable so we can check for correct length
 
     if (input.length != 5) {
         // validate user input here
         $("#invalidInputModal").modal();
         // tell them invalid input with a modal
-        $(".scrolling-profiles").text("Welcome to Politiscape! Please enter a valid 5 digit zip code to see your elected representatives.");
+        $(".scrolling-profiles").html(
+            "<div class='row'>" +
+            "<div class='container'>" +
+                "<div class='col-md-8 mx-auto scrolling-profiles'>" +
+                  "<div class='jumbotron welcome'>" +
+                   "<h1 class='display-4 text-center'>" +
+                    "<img class='display-4 mx-auto welcome-image' alt='logo' src='assets/images/politiscape.png'> </h1>" +
+                    "<p class='lead'>Type in your zip-code on the search bar!</p>" +
+                "</div>" +
+                "</div>" +
+            "</div>" +
+        "</div>"
+        );
         // displays the welcome message
-    } else {
-        var address = $("#address").val();
-        // sets the user input to a variable so we can pass it into the queryURL
     }
 
     var apikey = "AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
-    var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + address + "&key=" + apikey;
+    var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + input + "&key=" + apikey;
     // sets the api to a var and the queryURL to a variable
 
     $.ajax({
@@ -51,7 +60,6 @@ $("form").on("submit", function (e) {
 
                 var nameArr = name.split("") //building out array to remove spaces and punctuation for id names
 
-
                 for (var n = 0; n < nameArr.length; n++) {
                     if (nameArr[n] === ".") {
 
@@ -64,13 +72,8 @@ $("form").on("submit", function (e) {
 
                         nameArr[n] = nameArr[n]
                     }
-
                 }
-                console.log(nameArr)
-
                 var nameID = nameArr.join("")
-                console.log(nameID)
-
 
                 var party = response.officials[indexofName].party;
                 // person's political party
@@ -154,14 +157,13 @@ $("form").on("submit", function (e) {
                 moreIcon.addClass("fa fa-newspaper fa-stack-1x fa-inverse")
                 buttonCircle = $("<i>")
                 buttonCircle.addClass("fa fa-circle fa-stack-2x")
+                buttonCircle.attr("style", "color: rgb(168, 14, 14)")
                 moreBtn.append(buttonCircle).append(moreIcon)
 
                 var nameMore = "#" + nameID
                 var more = $("<a>")
                 more.addClass("moreBtn")
 
-
-                console.log(nameID)
                 more.append(moreBtn)
                 website.append(websiteBtn)
 
@@ -211,6 +213,7 @@ $("form").on("submit", function (e) {
             var cardClickedID = $(this).attr('id') // Grabs ID of specific button's card clicked so headlines div can be added to the right card
             var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
 
+            console.log(cardClickedID)
             // Creating div to hold list of headlines
             var headlinesDiv = $("<div class='text-left'>")
             // Gives that div a specific ID
@@ -227,7 +230,7 @@ $("form").on("submit", function (e) {
 
             $.get(queryURL)
                 .then(function (response) {
-                    console.log(response)
+
                     // $("#" + headlinesDivID).html("<p>NYT Headlines: </p>")
                     for (var i = 0; i < 3; i++) {
                         headlinesList.append("<li><a target='_blank' href='" + response.response.docs[i].web_url + "'>" + response.response.docs[i].headline.main + "</a><br>")
@@ -237,14 +240,9 @@ $("form").on("submit", function (e) {
 
                 })
 
-
-
-
-
-            console.log(headlinesDivID)
             $("#" + cardClickedID).append(headlinesDiv) //Appends the headlines div to the clicked-on card body
             $("#" + headlinesDivID).html(headlinesList) // Appends headlines to the newly created headlinesDiv
-            console.log("." + nameID);
+            
         });
 
     }) //ends $.ajax on line 25
