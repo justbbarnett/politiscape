@@ -212,7 +212,7 @@ $("form").on("submit", function (e) {
             var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
 
             // Creating div to hold list of headlines
-            var headlinesDiv = $("<div>")
+            var headlinesDiv = $("<div class='text-left'>")
             // Gives that div a specific ID
             headlinesDiv.attr("id", headlinesDivID)
 
@@ -232,7 +232,7 @@ $("form").on("submit", function (e) {
                     for (var i = 0; i < 3; i++) {
                         headlinesList.append("<li><a target='_blank' href='" + response.response.docs[i].web_url + "'>" + response.response.docs[i].headline.main + "</a><br>")
                         // $(".headlines").append("<a target='_blank' href='" + response.articles[i].url + "'>" + response.articles[i].title + "</a><br>")
-                        
+
                     }
 
                 })
