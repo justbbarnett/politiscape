@@ -1,3 +1,4 @@
++(function () {
 $("form").on("submit", function (e) {
     e.preventDefault();
     // prevents the automatic refresh on submit
@@ -208,43 +209,44 @@ $("form").on("submit", function (e) {
 
         } // ends for loop on line 30
 
+        var headlinesDisplayed = false; // Switch to determine whether to show or hide headlines on button click
         $(".headlines").on("click", function () {
-
-            var cardClickedID = $(this).attr('id') // Grabs ID of specific button's card clicked so headlines div can be added to the right card
-            var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
-
-            console.log(cardClickedID)
-            // Creating div to hold list of headlines
-            var headlinesDiv = $("<div class='text-left'>")
-            // Gives that div a specific ID
-            headlinesDiv.attr("id", headlinesDivID)
-
-            // Creating list of headlines
-            var headlinesList = $("<ul>")
-
-
-            var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=96a8c512eae346c58a56d7649ea2eef2";
-            queryURL += ('&q="' + cardClickedID + '"')
-            queryURL += "&news_desk:('Politics')&sort=newest"
-
-
-            $.get(queryURL)
-                .then(function (response) {
-
-                    // $("#" + headlinesDivID).html("<p>NYT Headlines: </p>")
-                    for (var i = 0; i < 3; i++) {
-                        headlinesList.append("<li><a target='_blank' href='" + response.response.docs[i].web_url + "'>" + response.response.docs[i].headline.main + "</a><br>")
-                        // $(".headlines").append("<a target='_blank' href='" + response.articles[i].url + "'>" + response.articles[i].title + "</a><br>")
-
-                    }
-
-                })
-
-            $("#" + cardClickedID).append(headlinesDiv) //Appends the headlines div to the clicked-on card body
-            $("#" + headlinesDivID).html(headlinesList) // Appends headlines to the newly created headlinesDiv
             
+            var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
+            if (headlinesDisplayed === false) {
+                var cardClickedID = $(this).attr('id') // Grabs ID of specific button's card clicked so headlines div can be added to the right card
+                
+    
+                // Creating div to hold list of headlines
+                var headlinesDiv = $("<div class='text-left'>")
+                // Gives that div a specific ID
+                headlinesDiv.attr("id", headlinesDivID)
+    
+                // Creating list of headlines
+                var headlinesList = $("<ul>")
+    
+    
+                var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=96a8c512eae346c58a56d7649ea2eef2";
+                queryURL += ('&q="' + cardClickedID + '"')
+                queryURL += "&news_desk:('Politics')&sort=newest"
+    
+    
+                $.get(queryURL)
+                    .then(function (response) {
+                        // $("#" + headlinesDivID).html("<p>NYT Headlines: </p>")
+                        for (var i = 0; i < 3; i++) {
+                            headlinesList.append("<li><a target='_blank' href='" + response.response.docs[i].web_url + "'>" + response.response.docs[i].headline.main + "</a><br>")    
+                        }
+                    })
+        
+                $("#" + cardClickedID).append(headlinesDiv) //Appends the headlines div to the clicked-on card body
+                $("#" + headlinesDivID).html(headlinesList) // Appends headlines to the newly created headlinesDiv
+                headlinesDisplayed = true;
+            } else {
+                $("#" + headlinesDivID).empty()
+                headlinesDisplayed = false;
+            }            
         });
-
     }) //ends $.ajax on line 25
-
 }) //ends "form on line 1
+})(); 
