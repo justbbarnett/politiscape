@@ -66,4 +66,13 @@ body {
 
 ul {
     margin-top: 28px;
+<<<<<<< HEAD
+=======
+}
+
+.no-spinners::-webkit-outer-spin-button,
+.no-spinners::-webkit-inner-spin-button {
+ -webkit-appearance: none;
+ margin: 0;
+>>>>>>> f9e4631edb3b8db3be3a53e91721ee664b08fa85
 }

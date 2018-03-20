@@ -73,7 +73,10 @@ $("form").on("submit", function (e) {
 
                         nameArr[n] = nameArr[n]
                     }
+<<<<<<< HEAD
+=======
                 }
+
                 var nameID = nameArr.join("")
 
                 var party = response.officials[indexofName].party;
@@ -85,8 +88,24 @@ $("form").on("submit", function (e) {
                     var photoSrc = "assets/images/nophoto.png"
                 } else {
                     var photoSrc = photo
+>>>>>>> f9e4631edb3b8db3be3a53e91721ee664b08fa85
+                }
+                var nameID = nameArr.join("")
+
+<<<<<<< HEAD
+                var party = response.officials[indexofName].party;
+                // person's political party
+                var photo = response.officials[indexofName].photoUrl;
+                // person's photo src
+
+                if (!response.officials[indexofName].photoUrl) {
+                    var photoSrc = "assets/images/nophoto.png"
+                } else {
+                    var photoSrc = photo
                 }
 
+=======
+>>>>>>> f9e4631edb3b8db3be3a53e91721ee664b08fa85
                 var socialMedia = response.officials[indexofName].channels
 
 
@@ -164,7 +183,10 @@ $("form").on("submit", function (e) {
                 var nameMore = "#" + nameID
                 var more = $("<a>")
                 more.addClass("moreBtn")
+<<<<<<< HEAD
 
+=======
+>>>>>>> f9e4631edb3b8db3be3a53e91721ee664b08fa85
                 more.append(moreBtn)
                 website.append(websiteBtn)
 
@@ -192,7 +214,10 @@ $("form").on("submit", function (e) {
                     .append(more)
                 // adds a div with a class social-links and an id with the officials name with their specific social media links
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f9e4631edb3b8db3be3a53e91721ee664b08fa85
                 wrapper.append(officialPhoto);
                 // puts the officialPhoto into the wrapper div
                 officialBody.append(officialName)
@@ -205,14 +230,24 @@ $("form").on("submit", function (e) {
                 $(".scrolling-profiles").append(newOfficial);
                 // dynamically creates new cards with each official's data
 
+<<<<<<< HEAD
             } //ends for loop on line 38
 
         } // ends for loop on line 30
+=======
+            } //ends for loop on line 50
+
+        } // ends for loop on line 33
+>>>>>>> f9e4631edb3b8db3be3a53e91721ee664b08fa85
 
         var headlinesDisplayed = false; // Switch to determine whether to show or hide headlines on button click
         $(".headlines").on("click", function () {
             
             var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
+<<<<<<< HEAD
+=======
+
+>>>>>>> f9e4631edb3b8db3be3a53e91721ee664b08fa85
             if (headlinesDisplayed === false) {
                 var cardClickedID = $(this).attr('id') // Grabs ID of specific button's card clicked so headlines div can be added to the right card
                 
