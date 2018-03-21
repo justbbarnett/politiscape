@@ -59,7 +59,8 @@ $("form").on("submit", function (e) {
                 var name = response.officials[indexofName].name;
                 // person's name
 
-                var nameArr = name.split("") //building out array to remove spaces and punctuation for id names
+                var nameArr = name.split("") 
+                //building out array to remove spaces and punctuation for id names
 
                 for (var n = 0; n < nameArr.length; n++) {
                     if (nameArr[n] === ".") {
@@ -87,7 +88,6 @@ $("form").on("submit", function (e) {
                 } else {
                     var photoSrc = photo
                 }
-                var nameID = nameArr.join("")
 
                 var socialMedia = response.officials[indexofName].channels
 
@@ -214,8 +214,7 @@ $("form").on("submit", function (e) {
             var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
             if (headlinesDisplayed === false) {
                 var cardClickedID = $(this).attr('id') // Grabs ID of specific button's card clicked so headlines div can be added to the right card
-                
-    
+                   
                 // Creating div to hold list of headlines
                 var headlinesDiv = $("<div class='text-left'>")
                 // Gives that div a specific ID
@@ -223,8 +222,7 @@ $("form").on("submit", function (e) {
     
                 // Creating list of headlines
                 var headlinesList = $("<ul>")
-    
-    
+       
                 var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=96a8c512eae346c58a56d7649ea2eef2";
                 queryURL += ('&q="' + cardClickedID + '"')
                 queryURL += "&news_desk:('Politics')&sort=newest"
