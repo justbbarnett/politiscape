@@ -1,27 +1,26 @@
 (function () {
 
-    var headlinesDisplayed = false; // Switch to determine whether to show or hide headlines on button click
     function displayHeadlines() {
 
         var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
-        
-        if (headlinesDisplayed === false) {
+
+        // Checks to see if Headlines button has class 'hidden' or 'displayed', and hides or displays the headlines for each card appropriately
+        if ($(this).hasClass('hidden')) {
+            $(this).removeClass('hidden')
+            $(this).addClass('displayed')
+
             var cardClickedID = $(this).attr('id') // Grabs ID of specific button's card clicked so headlines div can be added to the right card
 
             // Creating div to hold list of headlines
-            var headlinesDiv = $("<div class='text-left'>")
-            // Gives that div a specific ID
-            headlinesDiv.attr("id", headlinesDivID)
+            var headlinesDiv = $("<div class='text-left displayed'>").attr("id", headlinesDivID)
             headlinesDiv.addClass("animated fadeIn")
 
             // Creating list of headlines
             var headlinesList = $("<ul>")
 
-
             var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=96a8c512eae346c58a56d7649ea2eef2";
             queryURL += ('&q="' + cardClickedID + '"')
             queryURL += "&news_desk:('Politics')&sort=newest"
-
 
             $.get(queryURL)
                 .then(function (response) {
@@ -33,10 +32,11 @@
 
             $("#" + cardClickedID).append(headlinesDiv) //Appends the headlines div to the clicked-on card body
             $("#" + headlinesDivID).html(headlinesList) // Appends headlines to the newly created headlinesDiv
-            headlinesDisplayed = true;
         } else {
-            $("#" + headlinesDivID).empty()
-            headlinesDisplayed = false;
+            $(this).removeClass('displayed')
+            $(this).addClass('hidden')
+
+            $("#" + headlinesDivID).remove()
         }
     }
 
@@ -47,7 +47,7 @@
 
         // For loop to cycle through the arrays above
         for (var i = 0; i < 4; i++) {
-            var websiteBtn = $("<span class='fa-stack fa-lg'>") 
+            var websiteBtn = $("<span class='fa-stack fa-lg'>")
             var websiteURL = cardLinks[i] // Grabs the button's website from the cardLinks array
             var buttonCircle = $("<i>") // Creates the button circle background
             buttonCircle.addClass("fa fa-circle fa-stack-2x")
@@ -64,7 +64,7 @@
                 officialSocialDiv.append(website);
             } else {
                 // Different button creation process for Headlines
-                websiteBtn.addClass("headlines")
+                websiteBtn.addClass("headlines hidden")
                 websiteBtn.attr("id", nameID)
                 var website = $("<a>")
                 website.append(websiteBtn)
@@ -232,12 +232,12 @@
                     officialBody.append(officialName)
                         .append(officialPosition)
                         .append(officialSocialDiv);
-                        
+
 
                     // puts the officialName, officialPosition and the officialSocialDiv into the officialBody div
                     newOfficial.append(wrapper)
                         .append(officialBody);
-                        
+
                     //adds the wrapper with the image and the officialBody to the newOfficial
                     $(".scrolling-profiles").append(newOfficial);
 
