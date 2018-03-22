@@ -1,83 +1,5 @@
 (function () {
 
-    function displayHeadlines() {
-
-        var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
-
-        // Checks to see if Headlines button has class 'hidden' or 'displayed', and hides or displays the headlines for each card appropriately
-        if ($(this).hasClass('hidden')) {
-            $(this).removeClass('hidden')
-            $(this).addClass('displayed')
-
-            var cardClickedID = $(this).attr('id') // Grabs ID of specific button's card clicked so headlines div can be added to the right card
-
-            // Creating div to hold list of headlines
-            var headlinesDiv = $("<div class='text-left displayed'>").attr("id", headlinesDivID)
-            headlinesDiv.addClass("animated fadeIn")
-
-            // Creating list of headlines
-            var headlinesList = $("<ul>")
-
-            var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=96a8c512eae346c58a56d7649ea2eef2";
-            queryURL += ('&q="' + cardClickedID + '"')
-            queryURL += "&news_desk:('Politics')&sort=newest"
-
-            $.get(queryURL)
-                .then(function (response) {
-                    // $("#" + headlinesDivID).html("<p>NYT Headlines: </p>")
-                    for (var i = 0; i < 3; i++) {
-                        headlinesList.append("<li><a target='_blank' href='" + response.response.docs[i].web_url + "'>" + response.response.docs[i].headline.main + "</a><br>")
-                    }
-                })
-
-            $("#" + cardClickedID).append(headlinesDiv) //Appends the headlines div to the clicked-on card body
-            $("#" + headlinesDivID).html(headlinesList) // Appends headlines to the newly created headlinesDiv
-        } else {
-            $(this).removeClass('displayed')
-            $(this).addClass('hidden')
-
-            $("#" + headlinesDivID).remove()
-        }
-    }
-
-
-    function buttonGenerator(twitterID, facebookID, photoSrc, nameID, position, name, officialSocialDiv, officialURL) {
-        var cardLinks = ["https://twitter.com/" + twitterID, "https://facebook.com/" + facebookID, officialURL]
-        var websiteIconClasses = ["fab fa-twitter fa-stack-1x fa-inverse", "fab fa-facebook-f fa-stack-1x fa-inverse", "fa fa-user fa-stack-1x fa-inverse", "fa fa-newspaper fa-stack-1x fa-inverse"]
-
-        // For loop to cycle through the arrays above
-        for (var i = 0; i < 4; i++) {
-            var websiteBtn = $("<span class='fa-stack fa-lg'>")
-            var websiteURL = cardLinks[i] // Grabs the button's website from the cardLinks array
-            var buttonCircle = $("<i>") // Creates the button circle background
-            buttonCircle.addClass("fa fa-circle fa-stack-2x")
-            var websiteIcon = $("<i>") // Creates the website icon 
-            websiteIcon.addClass(websiteIconClasses[i])
-            websiteBtn.append(buttonCircle).append(websiteIcon) // Adds circle and icon to button
-
-            if (i < 3) {
-                var website = $("<a>") // Builds up the <a> tag to hold each button's link
-                website.attr("href", websiteURL)
-                website.attr("target", "_blank")
-                website.append(websiteBtn)
-
-                officialSocialDiv.append(website);
-            } else {
-                // Different button creation process for Headlines
-                websiteBtn.addClass("headlines hidden")
-                websiteBtn.attr("id", nameID)
-                var website = $("<a>")
-                website.append(websiteBtn)
-
-                officialSocialDiv.append(website);
-            }
-        }
-        // returns the div with added buttons back to the main body
-        return officialSocialDiv
-    }
-
-
-
     var counter = 0;
     $("form").on("submit", function (e) {
         e.preventDefault();
@@ -103,8 +25,7 @@
                 "</div>" +
                 "</div>" +
                 "</div>"
-            );
-            // displays the welcome message
+            ); // displays the welcome message
         }
 
         var apikey = "AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
@@ -190,8 +111,6 @@
 
                     //*********Create social media buttons**************
 
-
-
                     var newOfficial = $("<div class='card profile-card animated fadeIn'>");
                     // creates a newOfficial variable with a class profile-card
                     var wrapper = $("<div class='imgwrapper'>");
@@ -214,14 +133,7 @@
                     // Grabs link for official website button
                     var officialURL = response.officials[indexofName].urls
 
-                    // var officialWebsite = $("<a>")
-                    // officialWebsite.attr("href", response.officials[indexofName].url)
-                    // officialWebsite.attr("target", "_blank")
-                    // console.log("outside: " + officialWebsite)
-                    // console.log(response.officials[indexofName].urls)
-
                     // Generates buttons
-
 
                     buttonGenerator(twitterID, facebookID, photoSrc, nameID, position, name, officialSocialDiv, officialURL)
 
@@ -243,13 +155,89 @@
 
                     // dynamically creates new cards with each official's data
 
-                } //ends for loop on line 50
+                } //ends for loop on line 57
 
-            } // ends for loop on line 33
+            } // ends for loop on line 40
 
 
             $(".headlines").on("click", displayHeadlines)
 
-        }) //ends $.ajax on line 25
+        }) //ends $.ajax on line 35
     }) //ends "form on line 1
+
+    function buttonGenerator(twitterID, facebookID, photoSrc, nameID, position, name, officialSocialDiv, officialURL) {
+        var cardLinks = ["https://twitter.com/" + twitterID, "https://facebook.com/" + facebookID, officialURL]
+        var websiteIconClasses = ["fab fa-twitter fa-stack-1x fa-inverse", "fab fa-facebook-f fa-stack-1x fa-inverse", "fa fa-user fa-stack-1x fa-inverse", "fa fa-newspaper fa-stack-1x fa-inverse"]
+
+        // For loop to cycle through the arrays above
+        for (var i = 0; i < 4; i++) {
+            var websiteBtn = $("<span class='fa-stack fa-lg'>")
+            var websiteURL = cardLinks[i] // Grabs the button's website from the cardLinks array
+            var buttonCircle = $("<i>") // Creates the button circle background
+            buttonCircle.addClass("fa fa-circle fa-stack-2x")
+            var websiteIcon = $("<i>") // Creates the website icon 
+            websiteIcon.addClass(websiteIconClasses[i])
+            websiteBtn.append(buttonCircle).append(websiteIcon) // Adds circle and icon to button
+
+            if (i < 3) {
+                var website = $("<a>") // Builds up the <a> tag to hold each button's link
+                website.attr("href", websiteURL)
+                website.attr("target", "_blank")
+                website.append(websiteBtn)
+
+                officialSocialDiv.append(website);
+            } else {
+                // Different button creation process for Headlines
+                websiteBtn.addClass("headlines hidden")
+                websiteBtn.attr("id", nameID)
+                var website = $("<a>")
+                website.append(websiteBtn)
+
+                officialSocialDiv.append(website);
+            }
+        }
+        // returns the div with added buttons back to the main body
+        return officialSocialDiv
+    }
+
+    function displayHeadlines() {
+
+        var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
+
+        // Checks to see if Headlines button has class 'hidden' or 'displayed', and hides or displays the headlines for each card appropriately
+        if ($(this).hasClass('hidden')) {
+            $(this).removeClass('hidden')
+            $(this).addClass('displayed')
+
+            var cardClickedID = $(this).attr('id') // Grabs ID of specific button's card clicked so headlines div can be added to the right card
+
+            // Creating div to hold list of headlines
+            var headlinesDiv = $("<div class='text-left displayed'>").attr("id", headlinesDivID)
+            headlinesDiv.addClass("animated fadeIn")
+
+            // Creating list of headlines
+            var headlinesList = $("<ul>")
+
+            var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=96a8c512eae346c58a56d7649ea2eef2";
+            queryURL += ('&q="' + cardClickedID + '"')
+            queryURL += "&news_desk:('Politics')&sort=newest"
+
+            $.get(queryURL)
+                .then(function (response) {
+                    // $("#" + headlinesDivID).html("<p>NYT Headlines: </p>")
+                    for (var i = 0; i < 3; i++) {
+                        headlinesList.append("<li><a target='_blank' href='" + response.response.docs[i].web_url + "'>" + response.response.docs[i].headline.main + "</a><br>")
+                    }
+                })
+
+            $("#" + cardClickedID).append(headlinesDiv) //Appends the headlines div to the clicked-on card body
+            $("#" + headlinesDivID).html(headlinesList) // Appends headlines to the newly created headlinesDiv
+        } else {
+            $(this).removeClass('displayed')
+            $(this).addClass('hidden')
+
+            $("#" + headlinesDivID).remove()
+        }
+    }
+
 })();
