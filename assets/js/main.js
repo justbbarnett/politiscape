@@ -43,7 +43,7 @@
                 // person's official position
 
                 var officialInd = [];
-                // create an empty array
+                // create an empty array 
 
                 for (var m = 0; m < response.offices[k].officialIndices.length; m++) {
 
