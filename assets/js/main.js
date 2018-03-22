@@ -43,7 +43,7 @@
                 // person's official position
 
                 var officialInd = [];
-                // create an empty array 
+                // create an empty array to hold the titles of offices referenced by index in the name array
 
                 for (var m = 0; m < response.offices[k].officialIndices.length; m++) {
 
@@ -67,17 +67,17 @@
                     for (var n = 0; n < nameArr.length; n++) {
                         if (nameArr[n] === ".") {
 
-                            nameArr.splice([n], 1)
+                            nameArr.splice([n], 1) //removing punctuation for initials first
                         }
                         if (nameArr[n] === " ") {
 
-                            nameArr[n] = "-";
+                            nameArr[n] = "-"; //removing spaces to replace with hypens to create IDs and 
                         } else {
-                            nameArr[n] = nameArr[n]
+                            nameArr[n] = nameArr[n] //keeping all letters
                         }
                     }
 
-                    var nameID = nameArr.join("")
+                    var nameID = nameArr.join("") //rejoining the names for IDs
 
                     var party = response.officials[indexofName].party;
                     // person's political party
@@ -90,13 +90,11 @@
                     } else {
                         var photoSrc = photo
                     }
-                    var nameID = nameArr.join("")
 
                     var socialMedia = response.officials[indexofName].channels
 
-
                     if (!socialMedia) {
-                        // do nothing
+                        // do nothing so links will not show up
 
                     } else {
                         for (sm = 0; sm < socialMedia.length; sm++) {
@@ -106,6 +104,7 @@
                             if (socialMedia[sm].type === "Facebook") {
                                 var facebookID = socialMedia[sm].id
                             }
+                            //defining social media handles to use in the button generator
                         }
                     }
 
@@ -129,30 +128,27 @@
                     var officialSocialDiv = $("<div class='social-links'>");
                     officialSocialDiv.addClass(nameID)
                     officialSocialDiv.attr("id", name)
-
-                    // Grabs link for official website button
+                    //creates the social div to hold buttons for the link to external sites
+                    
                     var officialURL = response.officials[indexofName].urls
-
+                    // Grabs link for official website button
+                    
+                    buttonGenerator(twitterID, facebookID, photoSrc, nameID, position, name, officialSocialDiv, officialURL)
                     // Generates buttons
 
-                    buttonGenerator(twitterID, facebookID, photoSrc, nameID, position, name, officialSocialDiv, officialURL)
-
-                    // adds a div with a class social-links and an id with the officials name with their specific social media links
 
                     wrapper.append(officialPhoto);
                     // puts the officialPhoto into the wrapper div
                     officialBody.append(officialName)
                         .append(officialPosition)
                         .append(officialSocialDiv);
-
-
                     // puts the officialName, officialPosition and the officialSocialDiv into the officialBody div
+                    
                     newOfficial.append(wrapper)
                         .append(officialBody);
-
                     //adds the wrapper with the image and the officialBody to the newOfficial
-                    $(".scrolling-profiles").append(newOfficial);
 
+                    $(".scrolling-profiles").append(newOfficial);
                     // dynamically creates new cards with each official's data
 
                 } //ends for loop on line 57
@@ -163,14 +159,15 @@
             $(".headlines").on("click", displayHeadlines)
 
         }) //ends $.ajax on line 35
-    }) //ends "form on line 1
+    }) //ends "form on line 4
 
     function buttonGenerator(twitterID, facebookID, photoSrc, nameID, position, name, officialSocialDiv, officialURL) {
         var cardLinks = ["https://twitter.com/" + twitterID, "https://facebook.com/" + facebookID, officialURL]
         var websiteIconClasses = ["fab fa-twitter fa-stack-1x fa-inverse", "fab fa-facebook-f fa-stack-1x fa-inverse", "fa fa-user fa-stack-1x fa-inverse", "fa fa-newspaper fa-stack-1x fa-inverse"]
 
-        // For loop to cycle through the arrays above
+        
         for (var i = 0; i < 4; i++) {
+            // For loop to cycle through the arrays above
             var websiteBtn = $("<span class='fa-stack fa-lg'>")
             var websiteURL = cardLinks[i] // Grabs the button's website from the cardLinks array
             var buttonCircle = $("<i>") // Creates the button circle background
@@ -187,7 +184,7 @@
 
                 officialSocialDiv.append(website);
             } else {
-                // Different button creation process for Headlines
+                // Different button creation process for Headlines when hidden
                 websiteBtn.addClass("headlines hidden")
                 websiteBtn.attr("id", nameID)
                 var website = $("<a>")
@@ -204,27 +201,28 @@
 
         var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
 
-        // Checks to see if Headlines button has class 'hidden' or 'displayed', and hides or displays the headlines for each card appropriately
+        // ******Checks to see if Headlines button has class 'hidden' or 'displayed' 
+        //********hides or displays the headlines for each card appropriately
         if ($(this).hasClass('hidden')) {
             $(this).removeClass('hidden')
             $(this).addClass('displayed')
 
             var cardClickedID = $(this).attr('id') // Grabs ID of specific button's card clicked so headlines div can be added to the right card
 
-            // Creating div to hold list of headlines
             var headlinesDiv = $("<div class='text-left displayed'>").attr("id", headlinesDivID)
             headlinesDiv.addClass("animated fadeIn")
+            // Creating div to hold list of headlines
 
-            // Creating list of headlines
             var headlinesList = $("<ul>")
+            // Creating list of headlines
 
             var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=96a8c512eae346c58a56d7649ea2eef2";
-            queryURL += ('&q="' + cardClickedID + '"')
+            queryURL += ('&q="' + cardClickedID + '"') //this is the ID of the card (aka the name of the official)
             queryURL += "&news_desk:('Politics')&sort=newest"
 
             $.get(queryURL)
                 .then(function (response) {
-                    // $("#" + headlinesDivID).html("<p>NYT Headlines: </p>")
+                    
                     for (var i = 0; i < 3; i++) {
                         headlinesList.append("<li><a target='_blank' href='" + response.response.docs[i].web_url + "'>" + response.response.docs[i].headline.main + "</a><br>")
                     }
@@ -233,10 +231,10 @@
             $("#" + cardClickedID).append(headlinesDiv) //Appends the headlines div to the clicked-on card body
             $("#" + headlinesDivID).html(headlinesList) // Appends headlines to the newly created headlinesDiv
         } else {
-            $(this).removeClass('displayed')
+            $(this).removeClass('displayed') //removing displayed to show headlines are now hidden
             $(this).addClass('hidden')
 
-            $("#" + headlinesDivID).remove()
+            $("#" + headlinesDivID).remove() //removing div so official card goes back to original formatting
         }
     }
 
