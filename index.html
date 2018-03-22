@@ -3,266 +3,91 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Scrolling Politicians</title>
+    <title>Politiscape</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/scrolling.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/nav.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/main.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-</head>
-<body>
-    <!-- Fixed Modal sizing issue -->
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  MODAL Popout
-</button>
 
-<!-- Modal -->
-<div class="modal fade modal-fullscreen" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Politiscape</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/brands.css" integrity="sha384-IiIL1/ODJBRTrDTFk/pW8j0DUI5/z9m1KYsTm/RjZTNV8RHLGZXkUDwgRRbbQ+Jh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/main.css" />
+
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="index.html">
+                
+      <img class="nav-logo" alt="logo" src="assets/images/politiscape.png">
+      <a href="index.html"><button>Home</button></a>
+    </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!-- Leaving space for future links in expansion -->
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-1 address no-spinners"  id="address" type="number" placeholder="Your Zip Code" pattern="[0-9]{5}" aria-label="zipcode">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Zip</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="container">
+            <div class="col-md-8 mx-auto scrolling-profiles">
+              <div class="jumbotron welcome">
+               <h1 class="display-4 text-center heading">
+                
+                <img class="display-4 mx-auto welcome-image" alt="logo" src="assets/images/politiscape-welcome.png"> </h1>
+                
+                <hr class="my-4">
+                <p class="lead">Type in your zip code and find out who your politicians are, their social media links, their website and what New York Times has to say about them.</p>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-1 address no-spinners" type="number" placeholder="Your Zip Code" pattern="[0-9]{5}" aria-label="zipcode">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Zip</button>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="invalidInputModal" tabindex="-1" role="dialog" aria-labelledby="invalidInputModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="invalidInputLabel">Input Invalid</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
-        <!-- Figure out what we want the initial popout to say -->
-        <p>BLAH BLAH BLAH BLAH</p>
-        <p>Team is BLAH BLAH BLAH</p> 
-        <!-- Also look to see if we can have a Timed Close -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<!-- Save Changes seems irrelivant // Probably just a close button? Or Find our personal contact info? -->
-        <button type="button" class="btn btn-primary">Contact Us</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row bg-primary">
-  <!--changed for responsiveness // small padding / margin added (Careful of stacking too many)-->
-    <div class="container-fluid">
-      <!-- Nav Bar Doesnt expand// Dont think this is needed -->
-      <nav class="navbar navbar-expand-sm ">
-        <!-- Links at bottom of page -- >
-        <!-- If it doesnt meet the Lg requirement, it will be 4(everything else)...Its the Catch All for BootStrap4 -->
-          <img class="navbar-brand . col-lg-2 col-4" src="images/logo.png" width="15%" height="8%" alt="Politiscape Logo">
-          <ul class="navbar-nav col-lg-7 col-1">
-            <li class="nav-item">
-              <a class="nav-link  text-white" href="#">Nav 1</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Nav 2</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Nav 3</a>
-            </li>
-          </ul>
-          <div class="col-lg-3 col-md-3 float-right">
-            <form class="navbar-form my-auto" role="search">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Type here.." name="search">
-                <div >
-                  <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"> Search</span></button>
                 </div>
-              </div>
-            </form>
-          </div>
-      </nav>
+                <div class="modal-body">
+                    Please input a valid 5 digit zip code.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Try Again</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  
-  <div class="container mt-4" style="border:.1em solid #4596ff">
-  
-  
-    <div class="row mt-4" >
-      <div class="col-lg-3 my-auto">
-        <img src="images/arrow.png" style="width: 100%;">
-      </div>
-      <div class="col-lg-9" >
-        <!--Normal Header-->
-          <div class="col-lg-7 bg-danger float-right align-middle my-5 border border-primary text-center">
-              <h1 class="text-white">Politiscape</h1>
-          </div>
-  
-        <!--Politispace image-->
-        <!--<div class="image">-->
-          <!--<img src="images/logo.png" class="img img-responsive full-width float-right" />-->
-        <!--</div>-->
-      </div>
+    <div class="bottom-bar">
+        All Rights Reserved © 2018 | <a href="Privacy.html"style="color: red">Privacy Policy</a> | <a href="Terms Of Service.html"style="color: white">Terms of Service</a> | <a href="development Team.html" style="color:blue"> Development Team</a>
     </div>
-    <br/>
-    <div class="row">
-      <div class="col-lg-5">
-        <a href="#" class="thumbnail">
-          <div class="image" style="overflow: hidden; position: relative; padding-bottom: 100%">
-            <img src="images/profile.jpg" class="img img-responsive full-width border border-primary" style="position: absolute;" />
-          </div>
-          <div class="headerBar caption bg-primary text-white full-width" style = "z-index: 200;">
-            <h4>
-              <span class=" ml-5">Austin Mayor<br/></span>
-              <span class=" ml-5">Steve Adler - Democrat</span>
-            </h4>
-          </div>
-  
-  <!-- Changed to EM instead of px for borders / EM = Element Unit sizes ....adapts to screens better (dynamically)-->
-        </a>
-      </div>
-      <div class="col-lg-7" >
-        <h2 class="headerBar bg-primary text-white">
-          <span class="pl-5" >Contact Information</span>
-        </h2>
-      </div>
-    </div>
-    <br/>
-    <h2 class="headerBar bg-primary text-white pl-5" > Social Media Posts</h2>
-    <div class="row mt-4">
-      <div class="col-lg-4" >
-        <a href="#" class="thumbnail">
-          <div class="image" style="overflow: hidden; position: relative; padding-bottom: 100%">
-            <img src="images/1.PNG" class="img img-responsive padding-x-lg" style="position: absolute; width: 100%;" />
-          </div>
-        </a>
-      </div>
-      <div class="col-lg-4" >
-        <a href="#" class="thumbnail">
-          <div class="image" style="overflow: hidden; position: relative; padding-bottom: 100%">
-            <img src="images/2.PNG" class="img img-responsive full-width" style="position: absolute; width: 100%;" />
-          </div>
-        </a>
-      </div>
-      <div class="col-lg-4">
-        <a href="#" class="thumbnail">
-          <div class="image" style="overflow: hidden; position: relative; padding-bottom: 100%">
-            <img src="images/3.PNG" class="img img-responsive full-width" style="position: absolute; width: 100%;"  />
-          </div>
-        </a>
-      </div>
-    </div>
-  
-    <br/>
-    <h2 class="headerBar bg-primary text-white pl-5">Newsworthy</h2>
-  <!-- API Pulls  from news source -->
-    <div class="row mb-5 mt-5">
-      <div class="col-lg-2 text-lg-center" >
-        <a href="#"> API News Link </a>
-      </div>
-      <div class="col-lg-2 text-lg-center" >
-        <a href="#"> API News Link </a>
-      </div>
-      <div class="col-lg-2 text-lg-center">
-        <a href="#"> API News LInk </a>
-      </div>
-      <div class="col-lg-2 text-lg-center">
-        <a href="#"> API News Link </a>
-      </div>
-      <div class="col-lg-2 text-lg-center">
-        <a href="#"> API News Link </a>
-      </div>
-      <div class="col-lg-2 text-lg-center">
-        <a href="#" > API News Link </a>
-      </div>
-    </div>
-  
-  </div>
-  
-    <div class="row">
-      <div class="container scrolling-profiles">
-          <div class="col-md-8 mx-auto">
-              <div class="card profile-card">
-                  <div class="imgwrapper">
-                      <img class="card-img-top img-fluid img-responsive profile-img" src="assets/images/adler.jpg" alt="Card image cap">
-                  </div>
-                  <div class="card-body text-center">
-                      <h5 class="card-title">
-                          <span class="name">Steve Adler</span>
-                      </h5>
-                      <p class="card-text text-muted">
-                          <span class="position">Austin Mayor</span>
-                          --
-                          <span class="party">Democrat</span>
-                      </p>
-                      
-                      <a href="https://twitter.com/justbbarnett">
-                          <span class="fa-stack fa-lg">
-                              <i class="fa fa-circle fa-stack-2x"></i>
-                              <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                          </span>
-                      </a>
-                      <a href="https://www.facebook.com/justB.Barnett/">
-                          <span class="fa-stack fa-lg">
-                              <i class="fa fa-circle fa-stack-2x"></i>
-                              <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                          </span>
-                      </a>
-                      <a href="gmail.com" class="social email">
-                          <i class="fa fa-email"></i>
-                      </a>
-                      <a href="https://www.linkedin.com/in/justbbarnett/">
-                          <span class="fa-stack fa-lg">
-                              <i class="fa fa-circle fa-stack-2x"></i>
-                              <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                          </span>
-                      </a>
-                      <a href="#" class="btn btn-primary">More!</a>
-                  </div>
-              </div>
-              <div class="card profile-card" >
-                      <div class="imgwrapper">
-                          <img class="card-img-top img-fluid img-responsive profile-img" src="assets/images/president.jpg" alt="Card image cap">
-                      </div>
-                      <div class="card-body text-center">
-                          <h5 class="card-title">
-                              <span class="name">Donald Trump</span>
-                          </h5>
-                          <p class="card-text text-muted">
-                              <span class="position">President - US</span>
-                              --
-                              <span class="party">Republican</span>
-                          </p>
-                          
-                          <a href="https://twitter.com/justbbarnett">
-                              <span class="fa-stack fa-lg">
-                                  <i class="fa fa-circle fa-stack-2x"></i>
-                                  <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                              </span>
-                          </a>
-                          <a href="https://www.facebook.com/justB.Barnett/">
-                              <span class="fa-stack fa-lg">
-                                  <i class="fa fa-circle fa-stack-2x"></i>
-                                  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                              </span>
-                          </a>
-                          <a href="gmail.com" class="social email">
-                              <i class="fa fa-email"></i>
-                          </a>
-                          <a href="https://www.linkedin.com/in/justbbarnett/">
-                              <span class="fa-stack fa-lg">
-                                  <i class="fa fa-circle fa-stack-2x"></i>
-                                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                              </span>
-                          </a>
-                          <a href="#" class="btn btn-primary">More!</a>
-                      </div>
-                  </div>
-          </div>
-      </div>
-  </div>
-
-
 </body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
-<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-<!--<script src="assets/js/setup.js"></script>-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
 <script src="assets/js/main.js"></script>
+
 
 </html>
