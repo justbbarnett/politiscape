@@ -4,6 +4,7 @@
     function displayHeadlines() {
 
         var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
+        
         if (headlinesDisplayed === false) {
             var cardClickedID = $(this).attr('id') // Grabs ID of specific button's card clicked so headlines div can be added to the right card
 
@@ -11,6 +12,7 @@
             var headlinesDiv = $("<div class='text-left'>")
             // Gives that div a specific ID
             headlinesDiv.attr("id", headlinesDivID)
+            headlinesDiv.addClass("animated fadeIn")
 
             // Creating list of headlines
             var headlinesList = $("<ul>")
@@ -190,7 +192,7 @@
 
 
 
-                    var newOfficial = $("<div class='card profile-card'>");
+                    var newOfficial = $("<div class='card profile-card animated fadeIn'>");
                     // creates a newOfficial variable with a class profile-card
                     var wrapper = $("<div class='imgwrapper'>");
                     // adds a div with a class imgwrapper and an id with the officials name
@@ -230,10 +232,12 @@
                     officialBody.append(officialName)
                         .append(officialPosition)
                         .append(officialSocialDiv);
+                        
 
                     // puts the officialName, officialPosition and the officialSocialDiv into the officialBody div
                     newOfficial.append(wrapper)
                         .append(officialBody);
+                        
                     //adds the wrapper with the image and the officialBody to the newOfficial
                     $(".scrolling-profiles").append(newOfficial);
 
