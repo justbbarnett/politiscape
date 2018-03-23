@@ -14,17 +14,17 @@
             $("#invalidInputModal").modal();
             // tell them invalid input with a modal
             $(".scrolling-profiles").html(
-                "<div class='row'>" +
-                "<div class='container'>" +
-                "<div class='col-md-8 mx-auto scrolling-profiles'>" +
-                "<div class='jumbotron welcome'>" +
+                "<div class='jumbotron welcome animated fadeInDown'>" +
                 "<h1 class='display-4 text-center'>" +
-                "<img class='display-4 mx-auto welcome-image' alt='logo' src='assets/images/politiscape.png'> </h1>" + "<hr>" +
-                "<p class='lead'>Sorry, something went wrong. Please enter a valid 5 digit zip code so that you can see your politicians.</p>" +
-                "</div>" +
-                "</div>" +
-                "</div>" +
-                "</div>"
+                "<img class='display-4 mx-auto welcome-image' alt='logo' src='assets/images/politiscape-welcome.png'>" + 
+                "</h1>" + 
+                "<hr class='my-4>" +
+                "<p class='lead'>Sorry, something went wrong. Please enter a valid 5 digit zip code so that you can see your politicians.</p>" + 
+                "<form class='form-inline my-2 my-lg-0'>" + 
+                "<input class='form-control mr-1 address no-spinners' type='number' placeholder='Your Zip Code' aria-label='zipcode'>" + 
+                "<button class='btn btn-outline-primary my-2 my-sm-0 type='submit'>Go!</button>" + 
+                "</form>" +
+                "</div>" 
             ); // displays the error message
         }
 
