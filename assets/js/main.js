@@ -19,7 +19,7 @@
                 "<div class='col-md-8 mx-auto scrolling-profiles'>" +
                 "<div class='jumbotron welcome'>" +
                 "<h1 class='display-4 text-center'>" +
-                "<img class='display-4 mx-auto welcome-image' alt='logo' src='assets/images/politiscape.png'> </h1>" +
+                "<img class='display-4 mx-auto welcome-image' alt='logo' src='assets/images/politiscape.png'> </h1>" + "<hr>" +
                 "<p class='lead'>Sorry, something went wrong. Please enter a valid 5 digit zip code so that you can see your politicians.</p>" +
                 "</div>" +
                 "</div>" +
