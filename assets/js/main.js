@@ -8,31 +8,23 @@
         
         var input = $(this).find(".address").val();
         // sets the user input to a variable so we can check for correct length
-
+        
         if (input.length != 5) {
             // validate user input here
             $("#invalidInputModal").modal();
             
-            $(".lead").html(
-                "<p class='lead'>Sorry, something went wrong. Please enter a valid 5 digit zip code so that you can see your politicians.</p>"
-            )
-
-        }
-        else {
-            $(".scrolling-profiles").empty();
-            // empties the page so that we can repopulate it with info from a new zip code
+            $(".lead").html("Sorry, something went wrong. Please enter a valid 5 digit zip code so that you can see your politicians.")
         }
 
-
-        var apikey = "AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
-        var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + input + "&key=" + apikey;
-        // sets the api to a var and the queryURL to a variable
-
+        var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + input + "&key=AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
+        // sets the queryURL to a variable
+        
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-
+            $(".scrolling-profiles").empty();
+            
             for (var k = 0; k < response.offices.length; k++) {
 
                 var position = response.offices[k].name;
@@ -55,9 +47,6 @@
                     // get's the associated index value
                     var name = response.officials[indexofName].name;
                     // person's name
-
-
-
                     var nameArr = name.split("") //building out array to remove spaces and punctuation for id names
 
                     for (var n = 0; n < nameArr.length; n++) {
@@ -104,8 +93,6 @@
                         }
                     }
 
-                    //*********Create social media buttons**************
-
                     var newOfficial = $("<div class='card profile-card animated fadeIn'>");
                     // creates a newOfficial variable with a class profile-card
                     var wrapper = $("<div class='imgwrapper'>");
@@ -132,7 +119,6 @@
                     buttonGenerator(twitterID, facebookID, photoSrc, nameID, position, name, officialSocialDiv, officialURL)
                     // Generates buttons
 
-
                     wrapper.append(officialPhoto);
                     // puts the officialPhoto into the wrapper div
                     officialBody.append(officialName)
@@ -146,16 +132,17 @@
 
                     $(".scrolling-profiles").append(newOfficial);
                     // dynamically creates new cards with each official's data
-
-                } //ends for loop on line 57
-
-            } // ends for loop on line 40
-
+                } 
+            } 
 
             $(".headlines").on("click", displayHeadlines)
 
-        }) //ends $.ajax on line 35
-    }) //ends "form on line 4
+        }, function errorCallback(response){
+                if(response.responseJSON.error.message === "Failed to parse address" && input.length === 5) {
+                    $(".lead").html("Sorry, the Google Civic Information API doesn't believe that the zip code you entered is real. Please enter a different 5 digit zip code.")
+                } // displays an error message that will display when the api returns an error on a "valid" zip code. Meaning they don't have information for that zip code.
+        }) 
+    }) 
 
     function buttonGenerator(twitterID, facebookID, photoSrc, nameID, position, name, officialSocialDiv, officialURL) {
         var cardLinks = ["https://twitter.com/" + twitterID, "https://facebook.com/" + facebookID, officialURL]
@@ -226,13 +213,12 @@
 
             $("#" + cardClickedID).append(headlinesDiv) //Appends the headlines div to the clicked-on card body
             $("#" + headlinesDivID).html(headlinesList) // Appends headlines to the newly created headlinesDiv
-        } else {
+        } 
+        else {
             $(this).removeClass('displayed') //removing displayed to show headlines are now hidden
             $(this).addClass('hidden')
 
             $("#" + headlinesDivID).remove() //removing div so official card goes back to original formatting
         }
     }
-
 })();
-
