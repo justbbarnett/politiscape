@@ -2,31 +2,28 @@
 
     var counter = 0;
     $("form").on("submit", function (e) {
+        console.log("submit pushed")
         e.preventDefault();
         // prevents the automatic refresh on submit
-        $(".scrolling-profiles").empty();
-        // empties the page so that we can repopulate it with info from a new zip code
+        
         var input = $(this).find(".address").val();
         // sets the user input to a variable so we can check for correct length
 
         if (input.length != 5) {
             // validate user input here
             $("#invalidInputModal").modal();
-            // tell them invalid input with a modal
-            $(".scrolling-profiles").html(
-                "<div class='jumbotron welcome animated fadeInDown'>" +
-                "<h1 class='display-4 text-center'>" +
-                "<img class='display-4 mx-auto welcome-image' alt='logo' src='assets/images/politiscape-welcome.png'>" + 
-                "</h1>" + 
-                "<hr class='my-4>" +
-                "<p class='lead'>Sorry, something went wrong. Please enter a valid 5 digit zip code so that you can see your politicians.</p>" + 
-                "<form class='form-inline my-2 my-lg-0'>" + 
-                "<input class='form-control mr-1 address no-spinners' type='number' placeholder='Your Zip Code' aria-label='zipcode'>" + 
-                "<button class='btn btn-outline-primary my-2 my-sm-0 type='submit'>Go!</button>" + 
-                "</form>" +
-                "</div>" 
-            ); // displays the error message
+            
+            $(".lead").html(
+                "<p class='lead'>Sorry, something went wrong. Please enter a valid 5 digit zip code so that you can see your politicians.</p>"
+            )
+
         }
+        else {
+            $(".scrolling-profiles").empty();
+            // empties the page so that we can repopulate it with info from a new zip code
+        }
+
+        console.log("running address")
 
         var apikey = "AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
         var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + input + "&key=" + apikey;
