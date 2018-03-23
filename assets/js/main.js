@@ -2,7 +2,7 @@
 
     var counter = 0;
     $("form").on("submit", function (e) {
-        console.log("submit pushed")
+        
         e.preventDefault();
         // prevents the automatic refresh on submit
         
@@ -23,7 +23,6 @@
             // empties the page so that we can repopulate it with info from a new zip code
         }
 
-        console.log("running address")
 
         var apikey = "AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
         var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + input + "&key=" + apikey;
