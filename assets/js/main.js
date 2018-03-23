@@ -20,12 +20,12 @@
                 "<div class='jumbotron welcome'>" +
                 "<h1 class='display-4 text-center'>" +
                 "<img class='display-4 mx-auto welcome-image' alt='logo' src='assets/images/politiscape.png'> </h1>" +
-                "<p class='lead'>Type in your zip-code on the search bar!</p>" +
+                "<p class='lead'>Sorry, something went wrong. Please enter a valid 5 digit zip code so that you can see your politicians.</p>" +
                 "</div>" +
                 "</div>" +
                 "</div>" +
                 "</div>"
-            ); // displays the welcome message
+            ); // displays the error message
         }
 
         var apikey = "AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
