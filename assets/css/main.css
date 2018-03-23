@@ -30,7 +30,6 @@ body {
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 50px;
-    
 }
 
 .welcome {
@@ -127,4 +126,12 @@ ul {
 
 .red {
     color: red;
+}
+
+.team {
+    display: inline;
+}
+
+.smaller-text {
+    font-size-adjust: inherit;
 }
