@@ -76,12 +76,27 @@ body {
 
 }
 
+.scrolling-profiles {
+    margin-bottom: 55px;
+}
+
 .morediv {
     padding: 5px;
 }
 
 ul {
     margin-top: 28px;
+}
+
+.bottom-bar {
+    
+    left: 0;
+    bottom:0px;
+    width: 100%;
+    text-align:center;
+    font-size:.8em;
+    text-transform:uppercase;
+    padding:10px 0;
 }
 
 .no-spinners::-webkit-outer-spin-button,
