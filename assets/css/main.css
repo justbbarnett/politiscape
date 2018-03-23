@@ -1,18 +1,20 @@
 html {
     position: relative;
     min-height: 100%;
-  }
-  body {
+}
+
+body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-  }
-  .footer {
+}
+
+.footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 50px;
-  }
+}
 
 .nav-logo {
     max-height: 60px;
@@ -35,19 +37,15 @@ html {
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
-    /* background-color: gray; */
-    
 }
 
 .welcome-image {
     max-width: 100%;
-    
 }
 
 body {
     margin-top: 80px;
 }
-
 
 @media screen and (min-width:768px) /* any screen 768px and higher */ {
     
@@ -57,14 +55,14 @@ body {
     
     .navbar-header {
        display: none;
-   }
+    }
    
    .navbar-nav {
        
        float: left;
        table-layout: fixed;
        
-   }
+    }
 }
 
 .profile-card {
@@ -74,7 +72,6 @@ body {
     width: 75%;
     margin-left: auto;
     margin-right: auto;
-
 }
 
 .profile-img {
@@ -89,7 +86,6 @@ body {
     top: 0;
     max-height: 280px;
     margin-bottom: 5px;
-
 }
 
 .scrolling-profiles {
@@ -127,4 +123,8 @@ ul {
 
 .headlines:hover {
     cursor: pointer;
+}
+
+.red {
+    color: red;
 }
