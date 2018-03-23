@@ -139,6 +139,17 @@
 
         }, function errorCallback(response){
                 if(response.responseJSON.error.message === "Failed to parse address" && input.length === 5) {
+                    $(".scrolling-profiles").empty();
+                    $(".scrolling-profiles").html("<div class='jumbotron welcome animated fadeInDown'>" +
+                    "<h1 class='display-4 text-center heading'>" +
+                    "<img class='display-4 mx-auto welcome-image' alt='logo' src='assets/images/politiscape-welcome.png'> </h1>" +
+                    "<hr class='my-4'>" +
+                    "<p class='lead'>Type in your zip code and find out who your politicians are, their social media links, their website and what New York Times has to say about them.</p>" +
+                    "<form class='form-inline my-2 my-lg-0'>" +
+                    "<input class='form-control mr-1 address no-spinners' type='number' placeholder='Your Zip Code' aria-label='zipcode'>" +
+                    "<button class='btn btn-outline-primary my-2 my-sm-0' type='submit'>Zip</button>" +
+                    "</form>" +
+                    "</div>");
                     $(".lead").html("Sorry, the Google Civic Information API doesn't believe that the zip code you entered is real. Please enter a different 5 digit zip code.")
                 } // displays an error message that will display when the api returns an error on a "valid" zip code. Meaning they don't have information for that zip code.
         }) 
