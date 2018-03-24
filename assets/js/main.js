@@ -14,6 +14,7 @@
             url: queryURL,
             method: "GET",
             success: function (response) {
+                $(".team-header").remove();
                 $(".scrolling-profiles").empty();
                 // empties the page so that we don't repeat elements that are dynamically created after each zip entered
 
@@ -126,6 +127,7 @@
 
             }, 
             error: function errorCallback(){
+                $(".team-header").remove();
                 $(".scrolling-profiles").html("<div class='jumbotron welcome animated fadeIn'>" +
                 "<h1 class='display-4 text-center heading'>" +
                 "<img class='display-4 mx-auto welcome-image' alt='logo' src='assets/images/politiscape-welcome.png'> </h1>" +

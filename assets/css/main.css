@@ -139,3 +139,7 @@ ul {
 .team {
     display: inline;
 }
+h2 {
+    display: block;
+    padding-top: 15px;
+}
