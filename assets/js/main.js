@@ -90,8 +90,7 @@
                         var officialPhoto = $("<img class='card-img-top img-fluid img-responsive profile-img'>").attr("src", photoSrc);
                         // adds a img with a class card-img-top img-fluid img-responsive profile-img and sets the source to the officials photo from the civic information api
                         var officialBody = $("<div class='card-body text-center'>").attr("id", nameID);
-                        // adds a div with a class card-body text-center for formatting
-                        // adds name to the official body so that headlines can be appended to correct place
+                        // adds a div with a class card-body text-center for formatting and adds an id name to the official body so that headlines can be appended to correct place
                         var officialName = $("<h5 class='card-title'>").text(name);
                         // adds a h5 with a class card-title with the officials name
                         var officialPosition = $("<p class='card-text text-muted'>").text(position + " --- " + party);
