@@ -3,17 +3,18 @@ html {
     min-height: 100%;
 }
 
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-}
-
-.footer {
+footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    /* Set the fixed height of the footer here */
     height: 50px;
+}
+
+footer p {
+    margin:18px 0px;
+    text-transform: uppercase;
+    text-align:center;
+    font-size:.8em;
 }
 
 .nav-logo {
@@ -22,14 +23,6 @@ body {
 
 .bg-light {
     background-color: gray;
-}
-
-.heading {
-    color: white;
-    -webkit-text-stroke: 1px rgba(128, 128, 128, 0.603);
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 50px;
 }
 
 .welcome {
@@ -46,8 +39,7 @@ body {
     margin-top: 80px;
 }
 
-@media screen and (min-width:768px) /* any screen 768px and higher */ {
-    
+@media screen and (min-width:768px) { /* any screen 768px and higher */ 
     .navbar {
         border-radius: 0;
     }
@@ -57,10 +49,8 @@ body {
     }
    
    .navbar-nav {
-       
        float: left;
        table-layout: fixed;
-       
     }
 }
 
@@ -91,37 +81,18 @@ body {
     margin-bottom: 5px;
 }
 
-.smaller-text {
-    font-size-adjust: inherit;
-}
-
 .scrolling-profiles {
     margin-bottom: 55px;
-}
-
-.morediv {
-    padding: 5px;
 }
 
 ul {
     margin-top: 28px;
 }
 
-.bottom-bar {
-    
-    left: 0;
-    bottom:0px;
-    width: 100%;
-    text-align:center;
-    font-size:.8em;
-    text-transform:uppercase;
-    padding:10px 0;
-}
-
 .no-spinners::-webkit-outer-spin-button,
 .no-spinners::-webkit-inner-spin-button {
- -webkit-appearance: none;
- margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .headlines .fa-circle {
@@ -136,10 +107,6 @@ ul {
     color: red;
 }
 
-.team {
-    display: inline;
-}
 h2 {
-    display: block;
     padding-top: 15px;
 }

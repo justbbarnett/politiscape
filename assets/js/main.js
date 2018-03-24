@@ -124,7 +124,7 @@
                 } 
 
                 $(".headlines").on("click", displayHeadlines)
-
+                
             }, 
             error: function errorCallback(){
                 $(".team-header").remove();
