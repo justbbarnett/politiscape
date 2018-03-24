@@ -1,6 +1,5 @@
 (function () {
 
-    var counter = 0;
     $("form").on("submit", function (e) {
         
         e.preventDefault();
@@ -8,31 +7,24 @@
         
         var input = $(this).find(".address").val();
         // sets the user input to a variable so we can check for correct length
-
+        
         if (input.length != 5) {
-            // validate user input here
             $("#invalidInputModal").modal();
-            
-            $(".lead").html(
-                "<p class='lead'>Sorry, something went wrong. Please enter a valid 5 digit zip code so that you can see your politicians.</p>"
-            )
-
-        }
-        else {
-            $(".scrolling-profiles").empty();
-            // empties the page so that we can repopulate it with info from a new zip code
+            // calls the modal to show up
+            $(".lead").html("Sorry, something went wrong. Please enter a valid 5 digit zip code so that you can see your politicians.");
+            // changes the message in the html of the welcome message to reflect the error the user encountered 
         }
 
-
-        var apikey = "AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
-        var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + input + "&key=" + apikey;
-        // sets the api to a var and the queryURL to a variable
-
+        var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + input + "&key=AIzaSyBnSJK9UJlSfuLnLzo-85xDPDCRbjCHEM8";
+        // sets the queryURL to a variable
+        
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-
+            $(".scrolling-profiles").empty();
+            // empties the page so that we don't repeat elements that are dynamically created after each zip entered
+            
             for (var k = 0; k < response.offices.length; k++) {
 
                 var position = response.offices[k].name;
@@ -55,18 +47,13 @@
                     // get's the associated index value
                     var name = response.officials[indexofName].name;
                     // person's name
-
-
-
                     var nameArr = name.split("") //building out array to remove spaces and punctuation for id names
 
                     for (var n = 0; n < nameArr.length; n++) {
                         if (nameArr[n] === ".") {
-
                             nameArr.splice([n], 1) //removing punctuation for initials first
                         }
                         if (nameArr[n] === " ") {
-
                             nameArr[n] = "-"; //removing spaces to replace with hypens to create IDs and 
                         } else {
                             nameArr[n] = nameArr[n] //keeping all letters
@@ -80,19 +67,19 @@
                     var photo = response.officials[indexofName].photoUrl;
                     // person's photo src
 
-
                     if (!response.officials[indexofName].photoUrl) {
                         var photoSrc = "assets/images/nophoto.png"
-                    } else {
+                    } 
+                    else {
                         var photoSrc = photo
                     }
 
                     var socialMedia = response.officials[indexofName].channels
 
                     if (!socialMedia) {
-                        // do nothing so links will not show up
-
-                    } else {
+                        // checks if there are social media associated with the officials and if not, nothing happens
+                    } 
+                    else {
                         for (sm = 0; sm < socialMedia.length; sm++) {
                             if (socialMedia[sm].type === "Twitter") {
                                 var twitterID = socialMedia[sm].id
@@ -104,26 +91,22 @@
                         }
                     }
 
-                    //*********Create social media buttons**************
-
                     var newOfficial = $("<div class='card profile-card animated fadeIn'>");
                     // creates a newOfficial variable with a class profile-card
                     var wrapper = $("<div class='imgwrapper'>");
                     // adds a div with a class imgwrapper and an id with the officials name
                     var officialPhoto = $("<img class='card-img-top img-fluid img-responsive profile-img'>").attr("src", photoSrc);
                     // adds a img with a class card-img-top img-fluid img-responsive profile-img and sets the source to the officials photo from the civic information api
-                    var officialBody = $("<div class='card-body text-center'>");
+                    var officialBody = $("<div class='card-body text-center'>").attr("id", nameID);
                     // adds a div with a class card-body text-center for formatting
-                    officialBody.attr("id", nameID)
                     // adds name to the official body so that headlines can be appended to correct place
                     var officialName = $("<h5 class='card-title'>").text(name);
                     // adds a h5 with a class card-title with the officials name
                     var officialPosition = $("<p class='card-text text-muted'>").text(position + " --- " + party);
                     // adds a p with a class card-text text-muted with the officials position and party
 
-                    var officialSocialDiv = $("<div class='social-links'>");
+                    var officialSocialDiv = $("<div class='social-links'>").attr("id", name);
                     officialSocialDiv.addClass(nameID)
-                    officialSocialDiv.attr("id", name)
                     //creates the social div to hold buttons for the link to external sites
                     
                     var officialURL = response.officials[indexofName].urls
@@ -131,7 +114,6 @@
                     
                     buttonGenerator(twitterID, facebookID, photoSrc, nameID, position, name, officialSocialDiv, officialURL)
                     // Generates buttons
-
 
                     wrapper.append(officialPhoto);
                     // puts the officialPhoto into the wrapper div
@@ -146,67 +128,67 @@
 
                     $(".scrolling-profiles").append(newOfficial);
                     // dynamically creates new cards with each official's data
-
-                } //ends for loop on line 57
-
-            } // ends for loop on line 40
-
+                } 
+            } 
 
             $(".headlines").on("click", displayHeadlines)
 
-        }) //ends $.ajax on line 35
-    }) //ends "form on line 4
+        }, function errorCallback(response){
+                if(response.responseJSON.error.message === "Failed to parse address" && input.length === 5) {
+                    $(".scrolling-profiles").empty();
+                    $(".scrolling-profiles").html("<div class='jumbotron welcome animated fadeInDown'>" +
+                    "<h1 class='display-4 text-center heading'>" +
+                    "<img class='display-4 mx-auto welcome-image' alt='logo' src='assets/images/politiscape-welcome.png'> </h1>" +
+                    "<hr class='my-4'>" +
+                    "<p class='lead'>Type in your zip code and find out who your politicians are, their social media links, their website and what New York Times has to say about them.</p>" +
+                    "<form class='form-inline my-2 my-lg-0'>" +
+                    "<input class='form-control mr-1 address no-spinners' type='number' placeholder='Your Zip Code' aria-label='zipcode'>" +
+                    "<button class='btn btn-outline-primary my-2 my-sm-0' type='submit'>Zip</button>" +
+                    "</form>" +
+                    "</div>");
+                    $(".lead").html("Sorry, the Google Civic Information API doesn't believe that the zip code you entered is real. Please enter a different 5 digit zip code.")
+                } 
+            // displays an error message that will display when the api returns an error on a "valid" zip code. Meaning they don't have information for that zip code.
+        }) 
+    }) 
 
     function buttonGenerator(twitterID, facebookID, photoSrc, nameID, position, name, officialSocialDiv, officialURL) {
         var cardLinks = ["https://twitter.com/" + twitterID, "https://facebook.com/" + facebookID, officialURL]
         var websiteIconClasses = ["fab fa-twitter fa-stack-1x fa-inverse", "fab fa-facebook-f fa-stack-1x fa-inverse", "fa fa-user fa-stack-1x fa-inverse", "fa fa-newspaper fa-stack-1x fa-inverse"]
-
         
         for (var i = 0; i < 4; i++) {
             // For loop to cycle through the arrays above
             var websiteBtn = $("<span class='fa-stack fa-lg'>")
             var websiteURL = cardLinks[i] // Grabs the button's website from the cardLinks array
-            var buttonCircle = $("<i>") // Creates the button circle background
-            buttonCircle.addClass("fa fa-circle fa-stack-2x")
-            var websiteIcon = $("<i>") // Creates the website icon 
-            websiteIcon.addClass(websiteIconClasses[i])
+            var buttonCircle = $("<i class='fa fa-circle fa-stack-2x'>") // Creates the button circle background
+            var websiteIcon = $("<i>").addClass(websiteIconClasses[i]) // Creates the website icon 
             websiteBtn.append(buttonCircle).append(websiteIcon) // Adds circle and icon to button
 
             if (i < 3) {
-                var website = $("<a>") // Builds up the <a> tag to hold each button's link
-                website.attr("href", websiteURL)
-                website.attr("target", "_blank")
+                var website = $("<a target='_blank'>").attr("href", websiteURL) // Builds up the <a> tag to hold each button's link
                 website.append(websiteBtn)
-
                 officialSocialDiv.append(website);
-            } else {
-                // Different button creation process for Headlines when hidden
-                websiteBtn.addClass("headlines hidden")
-                websiteBtn.attr("id", nameID)
-                var website = $("<a>")
-                website.append(websiteBtn)
-
+            } 
+            else { // Different button creation process for Headlines when hidden
+                websiteBtn.addClass("headlines hidden").attr("id", nameID)
+                var website = $("<a>").append(websiteBtn)
                 officialSocialDiv.append(website);
             }
         }
-        // returns the div with added buttons back to the main body
-        return officialSocialDiv
+        return officialSocialDiv // returns the div with added buttons back to the main body
     }
 
     function displayHeadlines() {
 
         var headlinesDivID = $(this).attr('id') + "headlines" // Grabs the ID of the specific button clicked
 
-        // ******Checks to see if Headlines button has class 'hidden' or 'displayed' 
-        //********hides or displays the headlines for each card appropriately
-        if ($(this).hasClass('hidden')) {
+        if ($(this).hasClass('hidden')) { // ******Checks to see if Headlines button has class 'hidden' or 'displayed' 
             $(this).removeClass('hidden')
-            $(this).addClass('displayed')
+            $(this).addClass('displayed') //********hides or displays the headlines for each card appropriately
 
             var cardClickedID = $(this).attr('id') // Grabs ID of specific button's card clicked so headlines div can be added to the right card
 
-            var headlinesDiv = $("<div class='text-left displayed'>").attr("id", headlinesDivID)
-            headlinesDiv.addClass("animated fadeIn")
+            var headlinesDiv = $("<div class='text-left displayed animated fadeInDown'>").attr("id", headlinesDivID)
             // Creating div to hold list of headlines
 
             var headlinesList = $("<ul>")
@@ -226,12 +208,12 @@
 
             $("#" + cardClickedID).append(headlinesDiv) //Appends the headlines div to the clicked-on card body
             $("#" + headlinesDivID).html(headlinesList) // Appends headlines to the newly created headlinesDiv
-        } else {
+        } 
+        else {
             $(this).removeClass('displayed') //removing displayed to show headlines are now hidden
             $(this).addClass('hidden')
 
             $("#" + headlinesDivID).remove() //removing div so official card goes back to original formatting
         }
     }
-
 })();
