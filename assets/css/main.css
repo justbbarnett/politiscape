@@ -64,6 +64,10 @@ body {
     }
 }
 
+.team {
+    display: inline;
+}
+
 .profile-card {
     max-height: 100%;
     margin-top: 10px;
@@ -85,6 +89,10 @@ body {
     top: 0;
     max-height: 280px;
     margin-bottom: 5px;
+}
+
+.smaller-text {
+    font-size-adjust: inherit;
 }
 
 .scrolling-profiles {
